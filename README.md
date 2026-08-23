@@ -1,6 +1,7 @@
-# IHK-FISI Lerntrainer
+# IHK-AP1 Lerntrainer
 
-Prüfungsorientierter Lerntrainer für Fachinformatiker Systemintegration.
+Prüfungsorientierter Lerntrainer für die gemeinsame Abschlussprüfung Teil 1
+der IT-Berufe nach Ausbildungsordnung 2020.
 
 Die Inhalte werden anhand der im Ordner `LernStuff/IHK & Prüfungen` vorhandenen
 Prüfungen priorisiert. Der Trainer läuft vollständig lokal im Browser.
