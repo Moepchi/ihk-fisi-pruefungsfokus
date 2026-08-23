@@ -15,5 +15,6 @@ Der Lernfortschritt wird nur im lokalen Browser gespeichert.
 
 Die Anwendung enthält keine Originalprüfungen und keine privaten
 Schulunterlagen. Die Themenpriorisierung wurde aus lokal vorhandenen
-Prüfungsunterlagen abgeleitet; alle Lernfragen und Erklärungen wurden für
-diesen Trainer neu formuliert.
+Prüfungsunterlagen, offiziellen IHK-Musteraufgaben und öffentlich verfügbaren
+Prüfungsrückblicken bis 2025 abgeleitet; alle Lernfragen und Erklärungen wurden
+für diesen Trainer neu formuliert.

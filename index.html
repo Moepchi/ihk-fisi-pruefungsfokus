@@ -11,7 +11,7 @@
 <body>
 <main class="shell">
   <header class="top">
-    <div><div class="eyebrow">IHK · Fachinformatiker Systemintegration</div><h1>Lerne, was Punkte bringt.</h1><div class="muted">Fokus aus den vorhandenen AO-2020-Prüfungen 2022–2024, ergänzt um wiederkehrende Grundlagen älterer Prüfungen.</div></div>
+    <div><div class="eyebrow">IHK · Fachinformatiker Systemintegration</div><h1>Lerne, was Punkte bringt.</h1><div class="muted">Fokus aus lokalen AO-2020-Prüfungen 2022–2024, offiziellen IHK-Musteraufgaben und öffentlich dokumentierten Prüfungsrückblicken bis 2025.</div></div>
     <div class="score"><span class="muted">Dein Lernstand</span><strong id="overall">0 %</strong><span id="scoreDetail">0 Aufgaben erledigt</span></div>
   </header>
 
@@ -22,9 +22,9 @@
   <section id="focus" class="tab active">
     <div class="grid">
       <article class="card span8"><h2>Priorität nach Prüfungshäufigkeit</h2><div id="topicBars"></div></article>
-      <aside class="card span4"><h2>80/20-Regel</h2><p>Beginne mit Netzwerk, Sicherheit, Administration und Verfügbarkeit. Diese vier Blöcke decken in der ausgewerteten Stichprobe den Großteil der fachlichen Treffer ab.</p><p class="muted">Die Prozentwerte sind eine Themengewichtung aus Aufgaben- und Lösungstexten, keine offizielle IHK-Punkteverteilung.</p><span class="pill hot">Erst Kernstoff, dann Randthemen</span></aside>
+      <aside class="card span4"><h2>80/20-Regel</h2><p>Beginne mit Netzwerk, Sicherheit, Administration und Verfügbarkeit. Neuere Rückblicke bestätigen besonders DNS/DHCP, VPN, VLAN/STP, Firewall/NAT, IPv6, RAID/Backup und USV.</p><p class="muted">Die Prozentwerte sind ein Prioritätsindex aus lokalen Dokumenten. Internetquellen dienen als Aktualitätskorrektur, nicht als offizielle Punkteprognose.</p><span class="pill hot">Erst Kernstoff, dann Randthemen</span></aside>
       <article class="card span7"><h2>Was du sicher beherrschen solltest</h2><ul><li>IPv4-Subnetting ohne Hilfsmittel, IPv6-Präfixe, VLAN, Routing, DNS und DHCP</li><li>Schutzziele, Risikoanalyse, Firewall, VPN, Zertifikate, Backup und Rechtekonzepte</li><li>RAID, Nutzkapazität, Ausfallrisiken, USV und Hochverfügbarkeit</li><li>Windows/Linux-Grundlagen, Virtualisierung, Dienste und Fehlersuche</li><li>Kostenvergleich, Nutzwertanalyse, Amortisation und technische Dokumentation</li><li>SQL-Grundlagen und einfache Logik/Pseudocode für AP1</li></ul></article>
-      <aside class="card span5"><h2>Unterlagen auswählen</h2><p>Suche in deinen eigenen Unterlagen gezielt nach diesen fünf Blöcken:</p><ul><li>Subnetting und IPv4/IPv6</li><li>Backup, RAID und Verfügbarkeit</li><li>Verschlüsselung und digitale Signatur</li><li>Ticketsysteme, SLA und SLM</li><li>Kalkulation und Amortisation</li></ul><p class="muted">Private oder urheberrechtlich geschützte Prüfungsunterlagen werden nicht veröffentlicht.</p></aside>
+      <aside class="card span5 resources"><h2>Legale Online-Quellen</h2><a href="https://www.ihk.de/blueprint/servlet/resource/blob/5417166/d7ddd799d59a82bc262fa9ec50eef6bf/beispielspielaufgabe-pruefungit-bawue-barrierefrei-data.pdf" target="_blank" rel="noopener">Offizielle IHK-Musterprüfung AP1</a><a href="https://www.ihk.de/blueprint/servlet/resource/blob/5417196/ffe57bbe4a7e2cd14a88e183e397c80d/loesung-it-berufe-data.pdf" target="_blank" rel="noopener">Offizielle Lösungsvorschläge AP1</a><a href="https://www.ihk.de/blueprint/servlet/resource/blob/4773770/27fcdebf909a0def4dd85643474f1819/fachinformatiker-2020-ao-data.pdf" target="_blank" rel="noopener">Ausbildungsordnung Fachinformatiker 2020</a><a href="https://www.ihk.de/blueprint/servlet/resource/blob/6595910/bb104f9db7931ba848b75482cef84726/2025-09-11-leitfaden-systemintegration-data.pdf" target="_blank" rel="noopener">IHK-Leitfaden Systemintegration</a><p class="muted">Keine unerlaubten Kopien von Originalprüfungen.</p></aside>
     </div>
   </section>
 
@@ -73,6 +73,12 @@ const cards=[
  ['Service','Incident oder Problem?','Incident: konkrete Serviceunterbrechung. Problem: zugrunde liegende Ursache eines oder mehrerer Incidents.','Incident schnell beheben, Problem nachhaltig beseitigen.'],
  ['Wirtschaft','Wie berechnet man die Amortisationsdauer?','Investitionskosten geteilt durch jährliche Einsparung.','Nur sinnvoll bei konstant angenommener Einsparung.'],
  ['SQL','Was macht ein INNER JOIN?','Er liefert nur Datensätze, für die die Join-Bedingung in beiden Tabellen erfüllt ist.','LEFT JOIN behält alle Zeilen der linken Tabelle.']
+ ,['Netzwerk','Wozu dient Spanning Tree Protocol?','STP verhindert Layer-2-Schleifen, indem redundante Pfade logisch blockiert und bei Bedarf aktiviert werden.','RSTP konvergiert schneller als klassisches STP.']
+ ,['Netzwerk','Was bewirkt Link Aggregation?','Mehrere physische Verbindungen werden zu einer logischen Verbindung gebündelt, um Kapazität und Redundanz zu erhöhen.','LACP handelt Bündel dynamisch aus.']
+ ,['Sicherheit','Was ergänzt DNSSEC?','DNSSEC ermöglicht die kryptografische Prüfung von Authentizität und Integrität von DNS-Daten.','DNSSEC verschlüsselt DNS-Anfragen nicht.']
+ ,['Administration','Was leistet Mobile Device Management?','MDM verwaltet mobile Endgeräte zentral, etwa Richtlinien, Apps, Verschlüsselung, Updates und Remote-Löschung.','BYOD benötigt zusätzlich klare organisatorische Regeln.']
+ ,['Hardware','Wofür stehen VFD, VI und VFI bei USV-Systemen?','VFD: offline, VI: line-interactive, VFI: online/doppelte Wandlung.','VFI bietet die stärkste Entkopplung vom Versorgungsnetz.']
+ ,['Netzwerk','Was ist Router-on-a-Stick?','Inter-VLAN-Routing über eine physische Router-Schnittstelle mit mehreren 802.1Q-Subinterfaces.','Die Verbindung zum Switch ist ein Trunk.']
 ];
 const questions=[
  {t:'Subnetting',q:'Ein Unternehmen benötigt mindestens 50 Hostadressen pro Subnetz. Welches kleinste IPv4-Präfix genügt?',o:['/27','/26','/25','/24'],a:1,e:'Mit 6 Hostbits entstehen 2⁶ − 2 = 62 nutzbare Adressen. 32 − 6 = /26.'},
@@ -86,7 +92,15 @@ const questions=[
  {t:'SQL',q:'Welche Abfrage zählt Geräte je Standort?',o:['SELECT standort, COUNT(*) FROM geraet GROUP BY standort;','SELECT COUNT(standort) FROM geraet ORDER BY standort;','SELECT standort FROM geraet COUNT(*);','GROUP geraet BY standort;'],a:0,e:'Aggregatfunktionen pro Gruppe benötigen GROUP BY.'},
  {t:'Wirtschaft',q:'Eine Investition kostet 18.000 € und spart jährlich 6.000 €. Wann amortisiert sie sich rechnerisch?',o:['2 Jahre','3 Jahre','4 Jahre','6 Jahre'],a:1,e:'18.000 € ÷ 6.000 €/Jahr = 3 Jahre.'},
  {t:'VLAN',q:'Was ist für die Kommunikation zwischen zwei VLANs erforderlich?',o:['Hub','Layer-3-Routing','Nur ein Trunkkabel','DNSSEC'],a:1,e:'VLANs sind getrennte Layer-2-Broadcast-Domänen. Verkehr dazwischen muss geroutet werden.'},
- {t:'Service',q:'Was beschreibt ein SLA am besten?',o:['Quellcode-Lizenz','Vereinbarte Servicequalität und Reaktionszeiten','Liste aller Benutzerkonten','Netzwerkplan'],a:1,e:'Ein Service Level Agreement legt messbare Leistungs- und Qualitätsziele fest.'}
+ {t:'Service',q:'Was beschreibt ein SLA am besten?',o:['Quellcode-Lizenz','Vereinbarte Servicequalität und Reaktionszeiten','Liste aller Benutzerkonten','Netzwerkplan'],a:1,e:'Ein Service Level Agreement legt messbare Leistungs- und Qualitätsziele fest.'},
+ {t:'STP',q:'Warum blockiert STP unter Umständen einen physisch funktionierenden Switch-Port?',o:['Um DNS zu beschleunigen','Um eine Layer-2-Schleife zu verhindern','Um DHCP zu ersetzen','Um VLAN-Tags zu entfernen'],a:1,e:'Redundante aktive Layer-2-Pfade können Broadcast-Stürme und instabile MAC-Tabellen verursachen.'},
+ {t:'DNSSEC',q:'Welche Aussage zu DNSSEC stimmt?',o:['Es verschlüsselt jede DNS-Abfrage','Es ersetzt TLS','Es signiert DNS-Daten kryptografisch','Es vergibt IP-Adressen'],a:2,e:'DNSSEC schützt Authentizität und Integrität der DNS-Antwort, aber nicht deren Vertraulichkeit.'},
+ {t:'Firewall/NAT',q:'Ein interner Server soll aus dem Internet über TCP 443 erreichbar sein. Was wird typischerweise benötigt?',o:['Portweiterleitung/DNAT plus passende Firewallregel','Nur ein DNS-A-Record','Ein zusätzlicher DHCP-Lease','STP PortFast'],a:0,e:'DNS liefert nur die Zieladresse. Die Firewall beziehungsweise der Router muss den Verkehr erlauben und bei privater Zieladresse übersetzen.'},
+ {t:'Link Aggregation',q:'Welches Protokoll wird häufig zur dynamischen Aushandlung eines Link-Bündels verwendet?',o:['LACP','ARP','NTP','SNMP'],a:0,e:'LACP nach IEEE 802.1AX/802.3ad bündelt kompatible Ethernet-Links.'},
+ {t:'USV',q:'Welche USV-Klasse versorgt die Last dauerhaft über einen Wechselrichter?',o:['VFD/Offline','VI/Line-interactive','VFI/Online','Keine davon'],a:2,e:'Bei VFI erfolgt eine doppelte Wandlung; die Ausgangsseite ist weitgehend von Spannung und Frequenz des Eingangs unabhängig.'},
+ {t:'Übertragung',q:'10 GiB sollen netto über 1 Gbit/s übertragen werden. Welche ideale Mindestzeit liegt ohne Overhead am nächsten?',o:['ca. 10 s','ca. 86 s','ca. 800 s','ca. 1 s'],a:1,e:'10 GiB × 8 ≈ 85,9 Gbit. Geteilt durch 1 Gbit/s sind das etwa 86 Sekunden.'},
+ {t:'Routing',q:'Welche Route wird verwendet, wenn mehrere Routingtabelleneinträge zum Ziel passen?',o:['Die zuerst konfigurierte','Die Route mit dem längsten passenden Präfix','Immer die Default Route','Die Route mit der größten Netzmaske als Dezimalzahl'],a:1,e:'Router wählen grundsätzlich den spezifischsten Treffer: Longest Prefix Match.'},
+ {t:'MDM',q:'Welche MDM-Maßnahme reduziert bei Geräteverlust unmittelbar das Datenrisiko?',o:['Remote-Löschung und erzwungene Gerätevollverschlüsselung','Höhere Displayhelligkeit','Deaktiviertes WLAN','Größerer Gerätespeicher'],a:0,e:'Verschlüsselung schützt ruhende Daten; Remote-Wipe kann verwaltete Daten nach Verlust entfernen.'}
 ];
 
 const state=JSON.parse(localStorage.getItem('fisi-state')||'{"done":[],"known":[],"quizRight":0,"quizTotal":0}');
