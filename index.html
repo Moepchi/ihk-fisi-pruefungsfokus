@@ -91,6 +91,7 @@ code.inline{background:#1c2c46;padding:2px 6px;border-radius:6px;color:var(--blu
 <button data-tab="java">Programmierung</button>
 <button data-tab="wiso">Wirtschaft/Sozialkunde</button>
 <button data-tab="plan">Lernplan</button>
+<button data-tab="sync">Sync</button>
 </nav>
 
 <!-- OVERVIEW -->
@@ -201,7 +202,48 @@ code.inline{background:#1c2c46;padding:2px 6px;border-radius:6px;color:var(--blu
 <!-- PLAN -->
 <section id="plan" class="tab"><div class="grid">
 <article class="card span8"><h2>Fahrplan bis zur Zwischenprüfung</h2><p class="muted">Hake nur ab, was wirklich sitzt (Übungsaufgaben ohne Hilfe gelöst).</p><div id="planList" class="plan"></div></article>
-<aside class="card span4"><h2>Arbeitsweise</h2><ol><li>Kurz Wissen abrufen (Karteikarten).</li><li>Übungsaufgaben/Quiz im Prüfungsformat.</li><li>Fehler in eigenen Worten erklären.</li><li>Nach 2 Tagen erneut testen.</li></ol><p class="danger-zone">Fortschritt bleibt nur lokal in diesem Browser gespeichert.</p><button id="reset" class="btn danger">Fortschritt zurücksetzen</button></aside>
+<aside class="card span4"><h2>Arbeitsweise</h2><ol><li>Kurz Wissen abrufen (Karteikarten).</li><li>Übungsaufgaben/Quiz im Prüfungsformat.</li><li>Fehler in eigenen Worten erklären.</li><li>Nach 2 Tagen erneut testen.</li></ol><p class="danger-zone">Fortschritt bleibt nur lokal in diesem Browser gespeichert – zum Übertragen auf ein anderes Gerät siehe Tab "Sync".</p><button id="reset" class="btn danger">Fortschritt zurücksetzen</button></aside>
+</div></section>
+
+<!-- SYNC -->
+<section id="sync" class="tab"><div class="grid">
+<article class="card span7">
+<h2>Sync zwischen deinen Geräten</h2>
+<p class="muted">Nutzt einen privaten GitHub Gist als einfachen Cloud-Speicher für deinen Lernfortschritt. Kein automatischer Live-Sync – du klickst bewusst "Hochladen" bzw. "Herunterladen", wenn du das Gerät wechselst.</p>
+
+<h3>1. Einmalig: Zugangs-Token erstellen</h3>
+<p>Öffne <a href="https://github.com/settings/tokens/new?scopes=gist&amp;description=WBS-ZP-Sync" target="_blank" rel="noopener">github.com/settings/tokens/new</a> (Scope <code class="inline">gist</code> ist schon vorausgewählt), gib eine Ablaufzeit an und klicke "Generate token". Kopiere den Token direkt danach – er wird nur einmal angezeigt.</p>
+<div class="trainer-row">
+<label>GitHub Token (nur <code class="inline">gist</code>-Rechte nötig) <input id="syncToken" type="password" placeholder="ghp_..."></label>
+</div>
+<div class="controls"><button class="btn" id="syncSaveToken">Token in diesem Browser speichern</button></div>
+
+<h3 style="margin-top:22px">2. Gist verbinden</h3>
+<p class="muted">Auf dem <strong>ersten</strong> Gerät: Gist erstellen. Die angezeigte Gist-ID danach auf dem <strong>zweiten</strong> Gerät hier eintragen und verbinden.</p>
+<div class="trainer-row">
+<label>Gist-ID <input id="syncGistId" placeholder="wird nach Erstellung angezeigt"></label>
+</div>
+<div class="controls">
+<button class="btn" id="syncCreateGist">Neuen Sync-Gist erstellen</button>
+<button class="btn" id="syncSaveGistId">Gist-ID speichern (auf 2. Gerät)</button>
+</div>
+
+<h3 style="margin-top:22px">3. Synchronisieren</h3>
+<div class="controls">
+<button class="btn primary" id="syncUpload">📤 Hochladen (dieses Gerät → Gist)</button>
+<button class="btn primary" id="syncDownload">📥 Herunterladen (Gist → dieses Gerät)</button>
+</div>
+<div class="feedback" id="syncStatus"></div>
+</article>
+<aside class="card span5">
+<h2>Wichtig zu wissen</h2>
+<ul>
+<li>Der Token wird nur lokal in <em>diesem</em> Browser gespeichert (localStorage) und nur direkt an die GitHub-API gesendet – nirgendwo sonst hin.</li>
+<li>Der Gist ist <strong>privat</strong> (nicht öffentlich gelistet), aber jeder mit Token+ID könnte ihn lesen/schreiben – nicht weitergeben.</li>
+<li>"Herunterladen" überschreibt den lokalen Fortschritt auf diesem Gerät komplett mit dem Stand aus dem Gist.</li>
+<li>Reihenfolge beim Gerätewechsel: erst auf dem Gerät, mit dem du zuletzt gelernt hast, <strong>hochladen</strong>, dann auf dem anderen Gerät <strong>herunterladen</strong>.</li>
+</ul>
+</aside>
 </div></section>
 
 </main>
@@ -420,6 +462,79 @@ document.getElementById('subCheck').onclick=()=>{
     `Nutzbare Hosts: ${okHosts?'<span style="color:var(--good)">✔ richtig</span>':`<span style="color:var(--bad)">✘ richtig wären ${currentSub.hosts}</span>`}`;
 };
 document.getElementById('subNext').onclick=newSubTask;
+
+/* ---------- Sync via GitHub Gist ---------- */
+const GIST_FILE='wbs-zp-state.json';
+function syncStatus(msg,ok){
+  const el=document.getElementById('syncStatus');
+  el.innerHTML=`<span style="color:${ok===false?'var(--bad)':ok===true?'var(--good)':'var(--muted)'}">${msg}</span>`;
+}
+function getToken(){return localStorage.getItem('wbs-zp-token')||'';}
+function getGistId(){return localStorage.getItem('wbs-zp-gistid')||'';}
+document.getElementById('syncToken').value=getToken();
+document.getElementById('syncGistId').value=getGistId();
+
+document.getElementById('syncSaveToken').onclick=()=>{
+  const t=document.getElementById('syncToken').value.trim();
+  if(!t){syncStatus('Bitte zuerst einen Token eingeben.',false);return;}
+  localStorage.setItem('wbs-zp-token',t);
+  syncStatus('Token gespeichert (nur in diesem Browser).',true);
+};
+document.getElementById('syncSaveGistId').onclick=()=>{
+  const id=document.getElementById('syncGistId').value.trim();
+  if(!id){syncStatus('Bitte zuerst eine Gist-ID eingeben.',false);return;}
+  localStorage.setItem('wbs-zp-gistid',id);
+  syncStatus('Gist-ID gespeichert. Du kannst jetzt Hochladen/Herunterladen.',true);
+};
+document.getElementById('syncCreateGist').onclick=async()=>{
+  const token=getToken();
+  if(!token){syncStatus('Bitte zuerst den Token eingeben und speichern.',false);return;}
+  syncStatus('Erstelle Gist…');
+  try{
+    const res=await fetch('https://api.github.com/gists',{
+      method:'POST',
+      headers:{'Authorization':'token '+token,'Accept':'application/vnd.github+json'},
+      body:JSON.stringify({description:'WBS Zwischenprüfung Lernfortschritt',public:false,files:{[GIST_FILE]:{content:JSON.stringify(state)}}})
+    });
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const data=await res.json();
+    localStorage.setItem('wbs-zp-gistid',data.id);
+    document.getElementById('syncGistId').value=data.id;
+    syncStatus(`Gist erstellt. ID: <strong>${data.id}</strong> – trag diese ID auf deinem anderen Gerät im Feld "Gist-ID" ein.`,true);
+  }catch(e){syncStatus('Fehler beim Erstellen: '+e.message+' (Token korrekt? gist-Rechte?)',false);}
+};
+document.getElementById('syncUpload').onclick=async()=>{
+  const token=getToken(),gistId=getGistId();
+  if(!token||!gistId){syncStatus('Token und Gist-ID werden benötigt.',false);return;}
+  syncStatus('Lade hoch…');
+  try{
+    const res=await fetch('https://api.github.com/gists/'+gistId,{
+      method:'PATCH',
+      headers:{'Authorization':'token '+token,'Accept':'application/vnd.github+json'},
+      body:JSON.stringify({files:{[GIST_FILE]:{content:JSON.stringify(state)}}})
+    });
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    syncStatus('Hochgeladen · '+new Date().toLocaleString('de-DE'),true);
+  }catch(e){syncStatus('Fehler beim Hochladen: '+e.message,false);}
+};
+document.getElementById('syncDownload').onclick=async()=>{
+  const token=getToken(),gistId=getGistId();
+  if(!token||!gistId){syncStatus('Token und Gist-ID werden benötigt.',false);return;}
+  if(!confirm('Der lokale Fortschritt auf diesem Gerät wird überschrieben. Fortfahren?'))return;
+  syncStatus('Lade herunter…');
+  try{
+    const res=await fetch('https://api.github.com/gists/'+gistId,{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github+json'}});
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const data=await res.json();
+    const file=data.files[GIST_FILE];
+    if(!file)throw new Error('Datei nicht im Gist gefunden');
+    const remote=JSON.parse(file.content);
+    Object.assign(state,remote);
+    save();
+    renderPlan();updateOverall();renderCard('hw');renderCard('nw');updateQuizScore('hw');updateQuizScore('nw');
+    syncStatus('Heruntergeladen und übernommen · '+new Date().toLocaleString('de-DE'),true);
+  }catch(e){syncStatus('Fehler beim Herunterladen: '+e.message,false);}
+};
 
 /* ---------- init ---------- */
 renderPlan();updateOverall();
