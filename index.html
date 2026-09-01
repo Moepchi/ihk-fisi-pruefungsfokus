@@ -1,185 +1,431 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>IHK AP1 Prüfungsfokus</title>
-  <style>
-    :root{--bg:#08111f;--panel:#111d30;--panel2:#17263c;--text:#edf4ff;--muted:#9eb0ca;--line:#263a56;--accent:#63e6be;--blue:#74c0fc;--warn:#ffd43b;--bad:#ff8787;--good:#69db7c;--radius:18px}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#132943 0,var(--bg) 42%);color:var(--text);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}button,input,select{font:inherit}.shell{max-width:1180px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;margin-bottom:22px}.eyebrow{color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.75rem}h1{font-size:clamp(1.8rem,5vw,3.25rem);line-height:1.02;margin:.2rem 0 .5rem;max-width:750px}h2,h3{margin-top:0}.muted{color:var(--muted)}.score{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 22px;min-width:200px}.score strong{font-size:2rem;color:var(--accent);display:block}.tabs{display:flex;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:20px}.tabs button,.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:999px;padding:9px 16px;cursor:pointer}.tabs button.active,.btn.primary{background:var(--accent);color:#06251e;border-color:var(--accent);font-weight:700}.tab{display:none}.tab.active{display:block}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{background:linear-gradient(145deg,var(--panel),#0d1829);border:1px solid var(--line);border-radius:var(--radius);padding:20px}.span4{grid-column:span 4}.span5{grid-column:span 5}.span7{grid-column:span 7}.span8{grid-column:span 8}.span12{grid-column:span 12}.bar{height:10px;background:#233249;border-radius:10px;overflow:hidden}.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--accent));border-radius:10px}.topic{display:grid;grid-template-columns:minmax(170px,1.2fr) 2fr 58px;gap:14px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.topic:last-child{border:0}.topic small{display:block;color:var(--muted)}.pill{display:inline-block;border-radius:999px;padding:3px 9px;font-size:.78rem;background:#22344d;color:var(--blue)}.pill.hot{background:#3a3020;color:var(--warn)}.plan{display:grid;gap:12px}.plan-item{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;padding:14px;background:var(--panel2);border-radius:14px}.plan-item input{width:20px;height:20px;margin-top:3px;accent-color:var(--accent)}.plan-item.done{opacity:.58}.plan-item.done strong{text-decoration:line-through}.flash{min-height:330px;display:grid;align-content:center;text-align:center;cursor:pointer;user-select:none}.flash .answer{display:none}.flash.revealed .question{display:none}.flash.revealed .answer{display:block}.flash h2{font-size:clamp(1.45rem,3vw,2.2rem)}.controls{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:16px}.quiz-option{display:block;width:100%;text-align:left;margin:9px 0;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:13px 15px;border-radius:12px;cursor:pointer}.quiz-option:hover{border-color:var(--blue)}.quiz-option.correct{border-color:var(--good);background:#173626}.quiz-option.wrong{border-color:var(--bad);background:#3a2027}.feedback{min-height:52px;margin-top:12px}.formula{border-left:3px solid var(--accent);padding-left:14px;margin:15px 0}.formula code{color:var(--accent);font-size:1.05rem}.resources a{color:var(--blue);display:block;margin:8px 0}.danger-zone{color:var(--muted);font-size:.88rem}.btn.danger{color:var(--bad)}@media(max-width:760px){.shell{padding:16px}.top{display:block}.score{margin-top:16px}.span4,.span5,.span7,.span8{grid-column:span 12}.topic{grid-template-columns:1fr 50px}.topic .bar{grid-column:1/-1}.plan-item{grid-template-columns:auto 1fr}.plan-item .pill{grid-column:2}.tabs{position:sticky;top:0;background:var(--bg);z-index:2;padding-top:8px}}
-    .span6{grid-column:span 6}
-    .formula p{margin:.45rem 0 0}
-    @media(max-width:760px){.span6{grid-column:span 12}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WBS Zwischenprüfung Fokus</title>
+<style>
+:root{--bg:#08111f;--panel:#111d30;--panel2:#17263c;--text:#edf4ff;--muted:#9eb0ca;--line:#263a56;--accent:#63e6be;--blue:#74c0fc;--warn:#ffd43b;--bad:#ff8787;--good:#69db7c;--radius:18px}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 20% 0,#132943 0,var(--bg) 42%);color:var(--text);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+button,input,select{font:inherit}
+.shell{max-width:1180px;margin:auto;padding:24px}
+.top{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;margin-bottom:22px}
+.eyebrow{color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.75rem}
+h1{font-size:clamp(1.6rem,4.5vw,2.7rem);line-height:1.05;margin:.2rem 0 .5rem;max-width:750px}
+h2,h3{margin-top:0}
+.muted{color:var(--muted)}
+.score{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 22px;min-width:200px;text-align:center}
+.score strong{font-size:2rem;color:var(--accent);display:block}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:20px;position:sticky;top:0;background:var(--bg);z-index:2;padding-top:6px}
+.tabs button,.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:999px;padding:9px 16px;cursor:pointer}
+.tabs button.active,.btn.primary{background:var(--accent);color:#06251e;border-color:var(--accent);font-weight:700}
+.tab{display:none}
+.tab.active{display:block}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card{background:linear-gradient(145deg,var(--panel),#0d1829);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.span4{grid-column:span 4}.span5{grid-column:span 5}.span6{grid-column:span 6}.span7{grid-column:span 7}.span8{grid-column:span 8}.span12{grid-column:span 12}
+.bar{height:10px;background:#233249;border-radius:10px;overflow:hidden}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--accent));border-radius:10px}
+.topic{display:grid;grid-template-columns:minmax(170px,1.2fr) 2fr 58px;gap:14px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}
+.topic:last-child{border:0}
+.topic small{display:block;color:var(--muted)}
+.pill{display:inline-block;border-radius:999px;padding:3px 9px;font-size:.78rem;background:#22344d;color:var(--blue)}
+.pill.hot{background:#3a3020;color:var(--warn)}
+.plan{display:grid;gap:12px}
+.plan-item{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;padding:14px;background:var(--panel2);border-radius:14px}
+.plan-item input{width:20px;height:20px;margin-top:3px;accent-color:var(--accent)}
+.plan-item.done{opacity:.58}
+.plan-item.done strong{text-decoration:line-through}
+.flash{min-height:280px;display:grid;align-content:center;text-align:center;cursor:pointer;user-select:none}
+.flash .answer{display:none}
+.flash.revealed .question{display:none}
+.flash.revealed .answer{display:block}
+.flash h2{font-size:clamp(1.3rem,3vw,1.9rem)}
+.controls{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.quiz-option{display:block;width:100%;text-align:left;margin:9px 0;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:13px 15px;border-radius:12px;cursor:pointer}
+.quiz-option:hover{border-color:var(--blue)}
+.quiz-option.correct{border-color:var(--good);background:#173626}
+.quiz-option.wrong{border-color:var(--bad);background:#3a2027}
+.feedback{min-height:52px;margin-top:12px}
+.formula{border-left:3px solid var(--accent);padding-left:14px;margin:15px 0}
+.formula code{color:var(--accent);font-size:1.05rem}
+.formula p{margin:.45rem 0 0}
+.resources a{color:var(--blue);display:block;margin:8px 0}
+.danger-zone{color:var(--muted);font-size:.88rem}
+.btn.danger{color:var(--bad)}
+.soon{opacity:.7;text-align:center;padding:40px 20px}
+table.ref{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem}
+table.ref th,table.ref td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+table.ref th{background:var(--panel2);color:var(--blue)}
+.trainer-row{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+.trainer-row label{display:flex;flex-direction:column;gap:4px;font-size:.85rem;color:var(--muted);flex:1;min-width:120px}
+.trainer-row input{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 11px}
+.trainer-ip{font-size:1.4rem;font-weight:700;color:var(--accent);letter-spacing:.02em}
+code.inline{background:#1c2c46;padding:2px 6px;border-radius:6px;color:var(--blue)}
+@media(max-width:760px){
+.shell{padding:16px}.top{display:block}.score{margin-top:16px}
+.span4,.span5,.span6,.span7,.span8{grid-column:span 12}
+.topic{grid-template-columns:1fr 50px}.topic .bar{grid-column:1/-1}
+.plan-item{grid-template-columns:auto 1fr}.plan-item .pill{grid-column:2}
+}
+</style>
 </head>
 <body>
 <main class="shell">
-  <header class="top">
-    <div><div class="eyebrow">IHK · Abschlussprüfung Teil 1 · alle IT-Berufe</div><h1>AP1: Lerne, was Punkte bringt.</h1><div class="muted">90 Minuten, offene handlungsorientierte Aufgaben, 20 % der Abschlussnote. Schwerpunkt: einen IT-gestützten Arbeitsplatz planen, beschaffen, einrichten, absichern, testen und übergeben.</div></div>
-    <div class="score"><span class="muted">Dein Lernstand</span><strong id="overall">0 %</strong><span id="scoreDetail">0 Aufgaben erledigt</span></div>
-  </header>
+<header class="top">
+<div>
+<div class="eyebrow">WBS · Interne Zwischenprüfung · Fachinformatiker Systemintegration</div>
+<h1>Zwischenprüfung: Wirtschaft, Hardware, DB, Netzwerke, Programmierung.</h1>
+<div class="muted">5 Themenfelder à 20 %, Multiple-Choice &amp; Lückentext (Dropdown). Alle Aufgaben müssen bearbeitet werden für die volle Punktzahl.</div>
+</div>
+<div class="score"><span class="muted">Tage bis zur Prüfung</span><strong id="countdown">–</strong><span id="countdownDetail" class="muted"></span></div>
+</header>
 
-  <nav class="tabs" aria-label="Bereiche">
-    <button class="active" data-tab="focus">Prüfungsfokus</button><button data-tab="plan">Lernplan</button><button data-tab="cards">Karteikarten</button><button data-tab="quiz">Prüfungstraining</button><button data-tab="formulas">Formeln</button>
-  </nav>
+<nav class="tabs" aria-label="Bereiche">
+<button class="active" data-tab="overview">Überblick</button>
+<button data-tab="numbers">Zahlensysteme</button>
+<button data-tab="hardware">Hardware/IT</button>
+<button data-tab="network">Netzwerke</button>
+<button data-tab="db">Datenbanken</button>
+<button data-tab="java">Programmierung</button>
+<button data-tab="wiso">Wirtschaft/Sozialkunde</button>
+<button data-tab="plan">Lernplan</button>
+</nav>
 
-  <section id="focus" class="tab active">
-    <div class="grid">
-      <article class="card span8"><h2>Priorität nach Prüfungshäufigkeit</h2><div id="topicBars"></div></article>
-      <aside class="card span4"><h2>AP1-Strategie</h2><p>Denke immer als vollständiger Kundenauftrag: Bedarf verstehen, passende Lösung begründet auswählen, Kosten berechnen, sicher konfigurieren, testen und verständlich dokumentieren.</p><p class="muted">AP1 ist für alle IT-Berufe identisch. Tiefe FISI-Spezialthemen sind deshalb weniger wichtig als breit anwendbare Grundlagen.</p><span class="pill hot">Begründen statt Stichwörter raten</span></aside>
-      <article class="card span7"><h2>Was du sicher beherrschen solltest</h2><ul><li>Kundenanforderungen in Muss-, Soll- und Kann-Kriterien übersetzen</li><li>PC-Komponenten, Peripherie, Betriebssystem und Software passend auswählen</li><li>Angebote, Bezugspreis, Energiebedarf und Nutzwert nachvollziehbar berechnen</li><li>IPv4-Grundlagen, DHCP, DNS, WLAN, Ports und einfache Fehlersuche</li><li>Schutzziele, Datenschutz, Updates, Malware-Schutz, Rechte und Backup</li><li>Arbeitsplatz installieren, konfigurieren, testen und Abnahme protokollieren</li><li>Kunden zielgruppengerecht einweisen; einfache Logik und Datenformate lesen</li></ul></article>
-      <aside class="card span5 resources"><h2>Legale Online-Quellen</h2><a href="https://www.ihk.de/blueprint/servlet/resource/blob/5417166/d7ddd799d59a82bc262fa9ec50eef6bf/beispielspielaufgabe-pruefungit-bawue-barrierefrei-data.pdf" target="_blank" rel="noopener">Offizielle IHK-Musterprüfung AP1</a><a href="https://www.ihk.de/blueprint/servlet/resource/blob/5417196/ffe57bbe4a7e2cd14a88e183e397c80d/loesung-it-berufe-data.pdf" target="_blank" rel="noopener">Offizielle Lösungsvorschläge AP1</a><a href="https://www.ihk.de/blueprint/servlet/resource/blob/4773770/27fcdebf909a0def4dd85643474f1819/fachinformatiker-2020-ao-data.pdf" target="_blank" rel="noopener">Ausbildungsordnung Fachinformatiker 2020</a><a href="https://www.ihk.de/blueprint/servlet/resource/blob/6595910/bb104f9db7931ba848b75482cef84726/2025-09-11-leitfaden-systemintegration-data.pdf" target="_blank" rel="noopener">IHK-Leitfaden Systemintegration</a><p class="muted">Keine unerlaubten Kopien von Originalprüfungen.</p></aside>
-    </div>
-  </section>
+<!-- OVERVIEW -->
+<section id="overview" class="tab active">
+<div class="grid">
+<article class="card span8"><h2>Die 5 Themenfelder (je 20 % der Endnote)</h2><div id="topicBars"></div></article>
+<aside class="card span4"><h2>Prüfungsformat</h2><p>Multiple-Choice und Lückentexte per Dropdown-Menü. Es zählt <strong>Wiedererkennen &amp; Zuordnen</strong>, nicht freies Herleiten – gut übbar mit Quiz-Wiederholung.</p><p class="muted">Bei Nicht-Bestehen: Lernstandsgespräch, kein Ausschluss von der IHK-Prüfung.</p><span class="pill hot">Alle 5 Bereiche bearbeiten, keinen auslassen</span></aside>
+<article class="card span12"><h2>Gesamtfortschritt</h2><div class="bar"><i id="overallBar" style="width:0"></i></div><p id="overallDetail" class="muted"></p></article>
+</div>
+</section>
 
-  <section id="plan" class="tab"><div class="grid"><article class="card span8"><h2>21-Tage-Crashplan</h2><p class="muted">45–75 Minuten pro Tag. Hake nur ab, wenn du eine Aufgabe ohne Lösungshilfe geschafft hast.</p><div id="planList" class="plan"></div></article><aside class="card span4"><h2>Arbeitsweise</h2><ol><li>10 Minuten Wissen abrufen.</li><li>30–45 Minuten Aufgaben rechnen.</li><li>Fehler in eigenen Worten erklären.</li><li>Nach zwei Tagen erneut testen.</li></ol><p class="danger-zone">Fortschritt bleibt lokal in diesem Browser.</p><button id="reset" class="btn danger">Fortschritt zurücksetzen</button></aside></div></section>
+<!-- ZAHLENSYSTEME -->
+<section id="numbers" class="tab">
+<div class="grid">
+<article class="card span6">
+<h2>Referenz: Hex-Nibble-Tabelle</h2>
+<table class="ref"><tr><th>Dez</th><th>Hex</th><th>Bin</th></tr>
+<tr><td>0</td><td>0</td><td>0000</td></tr><tr><td>1</td><td>1</td><td>0001</td></tr>
+<tr><td>2</td><td>2</td><td>0010</td></tr><tr><td>3</td><td>3</td><td>0011</td></tr>
+<tr><td>4</td><td>4</td><td>0100</td></tr><tr><td>5</td><td>5</td><td>0101</td></tr>
+<tr><td>6</td><td>6</td><td>0110</td></tr><tr><td>7</td><td>7</td><td>0111</td></tr>
+<tr><td>8</td><td>8</td><td>1000</td></tr><tr><td>9</td><td>9</td><td>1001</td></tr>
+<tr><td>10</td><td>A</td><td>1010</td></tr><tr><td>11</td><td>B</td><td>1011</td></tr>
+<tr><td>12</td><td>C</td><td>1100</td></tr><tr><td>13</td><td>D</td><td>1101</td></tr>
+<tr><td>14</td><td>E</td><td>1110</td></tr><tr><td>15</td><td>F</td><td>1111</td></tr>
+</table>
+<p class="muted">Trick: Jede Hex-Ziffer = genau 4 Bit (ein Nibble). Direkt umgruppieren statt über Dezimal zu gehen.</p>
+</article>
+<article class="card span6">
+<h2>Umrechnungs-Trainer</h2>
+<p class="muted">Zufallszahl (0–255) umrechnen. Binär immer 8-stellig (mit führenden Nullen), Hex immer 2-stellig.</p>
+<p>Dezimal: <span class="trainer-ip" id="numDec">–</span></p>
+<div class="trainer-row">
+<label>Binär (8 Bit) <input id="numBinInput" placeholder="z.B. 01011010"></label>
+<label>Hex (2-stellig) <input id="numHexInput" placeholder="z.B. 5A"></label>
+</div>
+<div class="controls">
+<button class="btn primary" id="numCheck">Prüfen</button>
+<button class="btn" id="numNext">Neue Zahl</button>
+</div>
+<div class="feedback" id="numFeedback"></div>
+</article>
+</div>
+</section>
 
-  <section id="cards" class="tab"><div class="grid"><article id="flash" class="card flash span8" aria-live="polite"><div class="question"><div class="eyebrow" id="cardTopic"></div><h2 id="cardQuestion"></h2><p class="muted">Klicken, um die Antwort aufzudecken</p></div><div class="answer"><div class="eyebrow">Antwort</div><h2 id="cardAnswer"></h2><p id="cardHint" class="muted"></p></div></article><aside class="card span4"><h2>Karteikarten</h2><p id="cardCount"></p><p class="muted">Bewerte ehrlich. Unsichere Karten kommen häufiger wieder.</p><div class="controls"><button class="btn" id="again">Nochmal</button><button class="btn primary" id="known">Gewusst</button></div></aside></div></section>
+<!-- HARDWARE -->
+<section id="hardware" class="tab">
+<div class="grid">
+<article id="flash-hw" class="card flash span8" aria-live="polite">
+<div class="question"><div class="eyebrow" id="hwCardTopic"></div><h2 id="hwCardQuestion"></h2><p class="muted">Klicken, um die Antwort aufzudecken</p></div>
+<div class="answer"><div class="eyebrow">Antwort</div><h2 id="hwCardAnswer"></h2><p id="hwCardHint" class="muted"></p></div>
+</article>
+<aside class="card span4"><h2>Karteikarten</h2><p id="hwCardCount"></p><div class="controls"><button class="btn" id="hwAgain">Nochmal</button><button class="btn primary" id="hwKnown">Gewusst</button></div></aside>
+<article class="card span8"><div class="eyebrow" id="hwQuizTopic"></div><h2 id="hwQuizQuestion"></h2><div id="hwQuizOptions"></div><div id="hwFeedback" class="feedback" aria-live="polite"></div><button id="hwNextQuiz" class="btn primary" hidden>Nächste Aufgabe</button></article>
+<aside class="card span4"><h2>Quiz-Modus</h2><p><strong id="hwQuizScore">0 / 0</strong> richtig</p><div class="bar"><i id="hwQuizBar" style="width:0"></i></div></aside>
+</div>
+</section>
 
-  <section id="quiz" class="tab"><div class="grid"><article class="card span8"><div class="eyebrow" id="quizTopic"></div><h2 id="quizQuestion"></h2><div id="quizOptions"></div><div id="feedback" class="feedback" aria-live="polite"></div><button id="nextQuiz" class="btn primary" hidden>Nächste Aufgabe</button></article><aside class="card span4"><h2>Prüfungsmodus</h2><p><strong id="quizScore">0 / 0</strong> richtig</p><div class="bar"><i id="quizBar" style="width:0"></i></div><p class="muted">Die Aufgaben prüfen Verständnis und Rechenwege, nicht bloß Begriffe.</p></aside></div></section>
+<!-- NETWORK -->
+<section id="network" class="tab">
+<div class="grid">
+<article class="card span12">
+<h2>OSI-Modell (Referenz)</h2>
+<table class="ref"><tr><th>#</th><th>Schicht</th><th>Aufgabe</th><th>Beispiele</th></tr>
+<tr><td>7</td><td>Anwendung</td><td>Schnittstelle zum Nutzer</td><td>HTTP, FTP, DNS, SMTP</td></tr>
+<tr><td>6</td><td>Darstellung</td><td>Formatierung, Verschlüsseln</td><td>SSL/TLS, JPEG, ASCII</td></tr>
+<tr><td>5</td><td>Sitzung</td><td>Verbindung auf/abbauen</td><td>Sitzungs-IDs, RPC</td></tr>
+<tr><td>4</td><td>Transport</td><td>Ende-zu-Ende-Übertragung</td><td>TCP, UDP, Ports</td></tr>
+<tr><td>3</td><td>Vermittlung</td><td>Routing zwischen Netzen</td><td>IP, Router</td></tr>
+<tr><td>2</td><td>Sicherung</td><td>Übertragung im lokalen Netz</td><td>MAC-Adresse, Switch</td></tr>
+<tr><td>1</td><td>Bitübertragung</td><td>Rohe Bits als Signal</td><td>Kabel, WLAN, Hub</td></tr>
+</table>
+<p class="muted">Eselsbrücke (1→7): <em>Bitte Sei Vorsichtig Trink Sie Doch Alkoholfrei</em> – Bitübertragung, Sicherung, Vermittlung, Transport, Sitzung, Darstellung, Anwendung.</p>
+</article>
 
-  <section id="formulas" class="tab">
-    <div class="grid">
-      <article class="card span6">
-        <h2>Netzwerk</h2>
-        <div class="formula"><strong>IPv4-Hosts</strong><br><code>2^Hostbits − 2</code><p class="muted">Berechnet die nutzbaren Adressen eines klassischen Subnetzes. Die Präfixlänge wird von 32 abgezogen. Beispiel: /27 → 5 Hostbits → 2⁵ − 2 = 30 Hosts. Abgezogen werden Netz- und Broadcastadresse.</p></div>
-        <div class="formula"><strong>Subnetzanzahl</strong><br><code>2^geliehene Bits</code><p class="muted">Zeigt, wie viele gleich große Subnetze durch Verlängern des Präfixes entstehen. Beispiel: Ein /24 wird in /27 geteilt. Drei Bits wurden geliehen → 2³ = 8 Subnetze.</p></div>
-        <div class="formula"><strong>Übertragungszeit</strong><br><code>Datenmenge in bit ÷ Datenrate in bit/s</code><p class="muted">Vor dem Rechnen beide Größen auf passende Einheiten bringen. Ein Byte sind 8 bit. Beispiel: 1 GB ≈ 8 Gbit; bei 100 Mbit/s dauert die ideale Übertragung etwa 80 Sekunden. Protokoll-Overhead macht sie real langsamer.</p></div>
-        <div class="formula"><strong>IPv6-Präfix</strong><br><code>/64 → 64 Bit Netz + 64 Bit Interface-ID</code><p class="muted">Die Zahl hinter dem Schrägstrich gibt den Netzanteil an. /64 ist die typische Größe eines IPv6-LANs. Eine einzelne vollständige Adresse wird mit /128 bezeichnet.</p></div>
-      </article>
-      <article class="card span6">
-        <h2>Hardware & Wirtschaft</h2>
-        <div class="formula"><strong>RAID-5-Nutzkapazität</strong><br><code>(n − 1) × kleinste Platte</code><p class="muted">Die Kapazität einer Platte wird rechnerisch für Paritätsinformationen benötigt. Beispiel: 4 × 2 TB → (4 − 1) × 2 TB = 6 TB. RAID 5 verkraftet den Ausfall einer Platte, ersetzt aber kein Backup.</p></div>
-        <div class="formula"><strong>RAID-6-Nutzkapazität</strong><br><code>(n − 2) × kleinste Platte</code><p class="muted">Zwei Plattenkapazitäten entfallen auf doppelte Parität. Beispiel: 5 × 4 TB → 12 TB. Zwei Platten dürfen ausfallen. Unterschiedlich große Laufwerke werden nur bis zur Größe der kleinsten Platte genutzt.</p></div>
-        <div class="formula"><strong>Elektrische Leistung</strong><br><code>P = U × I</code><p class="muted">P wird in Watt, U in Volt und I in Ampere eingesetzt. Beispiel: 230 V × 0,5 A = 115 W. Die Formel gilt direkt bei Gleichstrom; bei Wechselstrom können weitere Faktoren relevant sein.</p></div>
-        <div class="formula"><strong>Elektrische Energie</strong><br><code>E = P × t</code><p class="muted">Für Kilowattstunden Leistung in kW und Zeit in Stunden einsetzen. Beispiel: 200 W = 0,2 kW; 0,2 kW × 8 h = 1,6 kWh. Kosten: Energie × Preis pro kWh.</p></div>
-        <div class="formula"><strong>Amortisationsdauer</strong><br><code>Investition ÷ jährliche Einsparung</code><p class="muted">Gibt an, nach wie vielen Jahren die Einsparungen die Anschaffung decken. Beispiel: 18.000 € ÷ 6.000 €/Jahr = 3 Jahre. Laufende Mehrkosten vorher von der Einsparung abziehen.</p></div>
-        <div class="formula"><strong>Nutzwertanalyse</strong><br><code>Σ (Gewichtung × Bewertung)</code><p class="muted">Kriterien gewichten, jede Alternative bewerten, Teilnutzen berechnen und addieren. Beispiel: 40 % Gewicht × 8 Punkte = 3,2 gewichtete Punkte. Die höchste Summe ist nach den gewählten Kriterien am geeignetsten.</p></div>
-      </article>
-    </div>
-  </section>
+<article id="flash-nw" class="card flash span8" aria-live="polite">
+<div class="question"><div class="eyebrow" id="nwCardTopic"></div><h2 id="nwCardQuestion"></h2><p class="muted">Klicken, um die Antwort aufzudecken</p></div>
+<div class="answer"><div class="eyebrow">Antwort</div><h2 id="nwCardAnswer"></h2><p id="nwCardHint" class="muted"></p></div>
+</article>
+<aside class="card span4"><h2>Karteikarten</h2><p id="nwCardCount"></p><div class="controls"><button class="btn" id="nwAgain">Nochmal</button><button class="btn primary" id="nwKnown">Gewusst</button></div></aside>
+
+<article class="card span8"><div class="eyebrow" id="nwQuizTopic"></div><h2 id="nwQuizQuestion"></h2><div id="nwQuizOptions"></div><div id="nwFeedback" class="feedback" aria-live="polite"></div><button id="nwNextQuiz" class="btn primary" hidden>Nächste Aufgabe</button></article>
+<aside class="card span4"><h2>Quiz-Modus</h2><p><strong id="nwQuizScore">0 / 0</strong> richtig</p><div class="bar"><i id="nwQuizBar" style="width:0"></i></div></aside>
+
+<article class="card span12">
+<h2>Subnetting-Trainer</h2>
+<p class="muted">Formel: Blockgröße = 256 − Maskenwert · Nutzbare Hosts = 2^Hostbits − 2</p>
+<p>Aufgabe: <span class="trainer-ip" id="subIp">–</span></p>
+<div class="trainer-row">
+<label>Netzadresse <input id="subNet" placeholder="z.B. 192.168.10.64"></label>
+<label>Broadcast-Adresse <input id="subBroadcast" placeholder="z.B. 192.168.10.127"></label>
+<label>Nutzbare Hosts <input id="subHosts" type="number" placeholder="z.B. 62"></label>
+</div>
+<div class="controls">
+<button class="btn primary" id="subCheck">Prüfen</button>
+<button class="btn" id="subNext">Neue Aufgabe</button>
+</div>
+<div class="feedback" id="subFeedback"></div>
+</article>
+</div>
+</section>
+
+<!-- STUBS -->
+<section id="db" class="tab"><div class="card soon"><h2>Datenbanken – noch nicht erarbeitet</h2><p class="muted">SQL-Grundlagen, Normalisierung, ER-Diagramme, JOINs folgen in einer der nächsten Lerneinheiten und werden hier ergänzt.</p></div></section>
+<section id="java" class="tab"><div class="card soon"><h2>Programmierung (Java) – noch nicht erarbeitet</h2><p class="muted">Grundlagen, Kontrollstrukturen, OOP-Konzepte folgen und werden hier ergänzt.</p></div></section>
+<section id="wiso" class="tab"><div class="card soon"><h2>Wirtschaft &amp; Sozialkunde – noch nicht erarbeitet</h2><p class="muted">Vertragsrecht, Sozialversicherung, Ausbildungsrecht etc. folgen und werden hier ergänzt.</p></div></section>
+
+<!-- PLAN -->
+<section id="plan" class="tab"><div class="grid">
+<article class="card span8"><h2>Fahrplan bis zur Zwischenprüfung</h2><p class="muted">Hake nur ab, was wirklich sitzt (Übungsaufgaben ohne Hilfe gelöst).</p><div id="planList" class="plan"></div></article>
+<aside class="card span4"><h2>Arbeitsweise</h2><ol><li>Kurz Wissen abrufen (Karteikarten).</li><li>Übungsaufgaben/Quiz im Prüfungsformat.</li><li>Fehler in eigenen Worten erklären.</li><li>Nach 2 Tagen erneut testen.</li></ol><p class="danger-zone">Fortschritt bleibt nur lokal in diesem Browser gespeichert.</p><button id="reset" class="btn danger">Fortschritt zurücksetzen</button></aside>
+</div></section>
+
 </main>
 <script>
+/* ---------- countdown ---------- */
+(function(){
+  const exam=new Date('2026-09-21T00:00:00');
+  const now=new Date();
+  const days=Math.ceil((exam-now)/86400000);
+  document.getElementById('countdown').textContent=days>=0?days:'0';
+  document.getElementById('countdownDetail').textContent=days>=0?'bis 21.09.2026':'Prüfungstag erreicht';
+})();
+
+/* ---------- topic overview ---------- */
 const topics=[
- {name:'Arbeitsplatz planen & auswählen',weight:26,level:'sehr hoch',note:'Bedarf, Kriterien, Hardware, Software, Ergonomie'},
- {name:'Konfigurieren & testen',weight:23,level:'sehr hoch',note:'Installation, Benutzer, Updates, Test- und Abnahmeplan'},
- {name:'IT-Sicherheit & Datenschutz',weight:20,level:'sehr hoch',note:'Schutzziele, Rechte, Backup, TOM, sichere Konfiguration'},
- {name:'Netzwerkgrundlagen',weight:16,level:'hoch',note:'IPv4, DHCP, DNS, WLAN, Ports, Fehlersuche'},
- {name:'Beschaffung & Wirtschaftlichkeit',weight:15,level:'hoch',note:'Angebot, Bezugspreis, Nutzwert, Energie, Lizenzen'},
- {name:'Dokumentation & Einweisung',weight:12,level:'hoch',note:'Protokoll, Übergabe, Zielgruppe, Qualitätssicherung'},
- {name:'Logik & Datenformate',weight:8,level:'mittel',note:'Pseudocode, Ablauf, XML/JSON, einfache Tabellen'},
- {name:'Tiefe FISI-AP2-Themen',weight:3,level:'später',note:'STP, komplexes Routing, Hochverfügbarkeit, Spezialdienste'}
+ {name:'Wirtschafts- und Sozialkunde',weight:20,status:'offen',note:'Vertragsrecht, Sozialversicherung, Ausbildung'},
+ {name:'Grundlagen Hardware/IT',weight:20,status:'in Arbeit',note:'Architektur, Speicher, Zahlensysteme, Schnittstellen'},
+ {name:'Datenbanken',weight:20,status:'offen',note:'SQL, Normalisierung, ER-Diagramme'},
+ {name:'Netzwerke',weight:20,status:'in Arbeit',note:'OSI, IP, Subnetting, Protokolle'},
+ {name:'Programmierung',weight:20,status:'offen',note:'Java-Grundlagen, Kontrollstrukturen, OOP'}
 ];
+document.getElementById('topicBars').innerHTML=topics.map(t=>`<div class="topic"><div><strong>${t.name}</strong><small>${t.note}</small></div><div class="bar"><i style="width:${t.weight/20*100}%"></i></div><div><strong>${t.weight}%</strong><small>${t.status}</small></div></div>`).join('');
+
+/* ---------- shared state ---------- */
+const state=JSON.parse(localStorage.getItem('wbs-zp-state')||'{"done":[],"hwKnown":[],"nwKnown":[],"hwQuizRight":0,"hwQuizTotal":0,"nwQuizRight":0,"nwQuizTotal":0}');
+const save=()=>localStorage.setItem('wbs-zp-state',JSON.stringify(state));
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tabs button,.tab').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');document.getElementById(b.dataset.tab).classList.add('active');
+});
+
+/* ---------- plan ---------- */
 const plan=[
- ['Tag 1','AP1-Aufbau verstehen und Musterprüfung überfliegen','Orientierung'],['Tag 2','Kundenbedarf ermitteln: Muss-, Soll- und Kann-Kriterien','Planung'],['Tag 3','CPU, RAM, SSD, GPU und Anschlüsse passend auswählen','Hardware'],['Tag 4','Peripherie, Ergonomie, Barrierefreiheit und Arbeitsplatz','Hardware'],['Tag 5','Betriebssysteme, Standardsoftware und Lizenzmodelle','Software'],['Tag 6','Angebote vergleichen: Bezugspreis und Nutzwertanalyse','Wirtschaft'],['Tag 7','Mini-Fall: Arbeitsplatz vollständig planen und begründen','Transfer'],
- ['Tag 8','IPv4-Adresse, Maske, Gateway und kleines Subnetting','Netzwerk'],['Tag 9','DHCP, DNS, WLAN, typische Ports und Fehlersuche','Netzwerk'],['Tag 10','Schutzziele, Bedrohung, Schwachstelle und Risiko','Sicherheit'],['Tag 11','Benutzer, Rechte, Passwörter, MFA und Updates','Sicherheit'],['Tag 12','Datenschutz, TOM, Datensparsamkeit und Löschkonzept','Datenschutz'],['Tag 13','Backup-Grundlagen und Wiederherstellung testen','Sicherheit'],['Tag 14','Probeprüfung Netzwerk + Sicherheit unter Zeitdruck','Transfer'],
- ['Tag 15','Installation und Konfiguration schrittweise dokumentieren','Praxis'],['Tag 16','Testfälle, Soll-/Ist-Ergebnis und Abnahmeprotokoll','Qualität'],['Tag 17','Kundeneinweisung und zielgruppengerechte Kommunikation','Übergabe'],['Tag 18','Pseudocode, Bedingungen, Schleifen und Tabellen lesen','Logik'],['Tag 19','XML/JSON-Grundstruktur und einfache Datenverarbeitung','Daten'],['Tag 20','Offizielle AP1-Musterprüfung in 90 Minuten bearbeiten','Generalprobe'],['Tag 21','Fehlerliste schließen und zweite 90-Minuten-Simulation','Generalprobe']
+ ['Tag 1-2','Grundlagen Hardware/IT: Architektur, Speicher, Schnittstellen','Hardware'],
+ ['Tag 3','Zahlensysteme: Dezimal/Binär/Hex sicher umrechnen','Hardware'],
+ ['Tag 4-5','Netzwerke: OSI-Modell, IP-Grundlagen, TCP/UDP','Netzwerk'],
+ ['Tag 6-7','Netzwerke: Subnetting üben (Netzadresse/Broadcast/Hosts)','Netzwerk'],
+ ['Tag 8-9','Datenbanken: SQL-Grundlagen (SELECT, WHERE, JOIN)','Datenbanken'],
+ ['Tag 10-11','Datenbanken: Normalisierung, ER-Diagramme','Datenbanken'],
+ ['Tag 12-14','Programmierung: Java-Grundlagen, Kontrollstrukturen','Programmierung'],
+ ['Tag 15-16','Programmierung: OOP-Konzepte, kleine Übungsprogramme','Programmierung'],
+ ['Tag 17-18','Wirtschaft/Sozialkunde: Vertragsrecht, Ausbildung','WiSo'],
+ ['Tag 19','Wirtschaft/Sozialkunde: Sozialversicherung, Mitbestimmung','WiSo'],
+ ['Tag 20','Gesamtwiederholung: alle 5 Themenfelder Quiz-Runde','Wiederholung'],
+ ['Tag 21','Letzte Wiederholung + entspannt in die Prüfung','Wiederholung']
 ];
-const ap2Cards=[
- ['Netzwerk','Wie viele nutzbare Hosts bietet ein /27-Netz?','30 Hosts. Es bleiben 5 Hostbits: 2⁵ − 2 = 30.','Netz- und Broadcastadresse sind nicht als Host nutzbar.'],
- ['Netzwerk','Was unterscheidet Switch und Router?','Ein Switch verbindet Geräte innerhalb eines Layer-2-Netzes; ein Router vermittelt zwischen IP-Netzen auf Layer 3.','Ein Layer-3-Switch kann beide Rollen kombinieren.'],
- ['Netzwerk','Wozu dient ein VLAN?','Zur logischen Trennung von Broadcast-Domänen auf gemeinsamer Switch-Infrastruktur.','Kommunikation zwischen VLANs benötigt Routing.'],
- ['Netzwerk','Was macht DNS?','DNS übersetzt Namen in IP-Adressen und verwaltet weitere Ressourceneinträge wie MX, CNAME oder TXT.','UDP/TCP Port 53.'],
- ['Netzwerk','Was bedeutet ein IPv6-/64-Präfix?','64 Bit kennzeichnen das Netz, 64 Bit die Interface-ID.','/64 ist die typische Größe eines IPv6-LANs.'],
- ['Sicherheit','Authentifizierung oder Autorisierung?','Authentifizierung prüft die Identität; Autorisierung prüft die erlaubten Aktionen.','Erst wer bist du, dann was darfst du.'],
- ['Sicherheit','Welche drei klassischen Schutzziele gibt es?','Vertraulichkeit, Integrität und Verfügbarkeit.','Oft ergänzt um Authentizität und Verbindlichkeit.'],
- ['Sicherheit','Was liefert eine digitale Signatur?','Integrität, Authentizität und je nach Kontext Nichtabstreitbarkeit – aber keine Vertraulichkeit.','Für Vertraulichkeit wird verschlüsselt.'],
- ['Sicherheit','Unterschied Hashing und Verschlüsselung?','Hashing ist eine Einwegfunktion; Verschlüsselung ist mit Schlüssel umkehrbar.','Passwörter werden gesalzen gehasht.'],
- ['Sicherheit','Was bedeutet Least Privilege?','Jede Identität erhält nur die minimal nötigen Rechte und nur so lange wie erforderlich.','Reduziert Schadensausmaß und Fehlbedienung.'],
- ['Backup','Was bedeutet die 3-2-1-Regel?','Drei Kopien, auf zwei unterschiedlichen Medientypen, davon eine extern/offline.','Ein RAID ersetzt kein Backup.'],
- ['Backup','RPO und RTO?','RPO: maximal tolerierbarer Datenverlust in Zeit. RTO: maximal tolerierbare Wiederherstellungsdauer.','Beide sind Geschäftsanforderungen.'],
- ['Speicher','Nutzkapazität RAID 5 mit 4 × 2 TB?','6 TB: (4 − 1) × 2 TB.','Ausfall genau einer Platte tolerierbar.'],
- ['Administration','Snapshot oder Backup?','Ein Snapshot ist ein kurzfristiger Zustandsanker im selben System; ein Backup ist eine unabhängige wiederherstellbare Kopie.','Snapshots schützen nicht zuverlässig vor Ausfall des Speichersystems.'],
- ['Administration','Container oder virtuelle Maschine?','Container teilen den Kernel des Hosts; VMs virtualisieren vollständige Gastbetriebssysteme.','Container starten meist schneller, isolieren aber anders.'],
- ['Service','Incident oder Problem?','Incident: konkrete Serviceunterbrechung. Problem: zugrunde liegende Ursache eines oder mehrerer Incidents.','Incident schnell beheben, Problem nachhaltig beseitigen.'],
- ['Wirtschaft','Wie berechnet man die Amortisationsdauer?','Investitionskosten geteilt durch jährliche Einsparung.','Nur sinnvoll bei konstant angenommener Einsparung.'],
- ['SQL','Was macht ein INNER JOIN?','Er liefert nur Datensätze, für die die Join-Bedingung in beiden Tabellen erfüllt ist.','LEFT JOIN behält alle Zeilen der linken Tabelle.']
- ,['Netzwerk','Wozu dient Spanning Tree Protocol?','STP verhindert Layer-2-Schleifen, indem redundante Pfade logisch blockiert und bei Bedarf aktiviert werden.','RSTP konvergiert schneller als klassisches STP.']
- ,['Netzwerk','Was bewirkt Link Aggregation?','Mehrere physische Verbindungen werden zu einer logischen Verbindung gebündelt, um Kapazität und Redundanz zu erhöhen.','LACP handelt Bündel dynamisch aus.']
- ,['Sicherheit','Was ergänzt DNSSEC?','DNSSEC ermöglicht die kryptografische Prüfung von Authentizität und Integrität von DNS-Daten.','DNSSEC verschlüsselt DNS-Anfragen nicht.']
- ,['Administration','Was leistet Mobile Device Management?','MDM verwaltet mobile Endgeräte zentral, etwa Richtlinien, Apps, Verschlüsselung, Updates und Remote-Löschung.','BYOD benötigt zusätzlich klare organisatorische Regeln.']
- ,['Hardware','Wofür stehen VFD, VI und VFI bei USV-Systemen?','VFD: offline, VI: line-interactive, VFI: online/doppelte Wandlung.','VFI bietet die stärkste Entkopplung vom Versorgungsnetz.']
- ,['Netzwerk','Was ist Router-on-a-Stick?','Inter-VLAN-Routing über eine physische Router-Schnittstelle mit mehreren 802.1Q-Subinterfaces.','Die Verbindung zum Switch ist ein Trunk.']
-];
-const cards=[
- ['Planung','Was ist der Unterschied zwischen Muss- und Soll-Kriterium?','Muss-Kriterien sind zwingend; Soll-Kriterien sind wichtig, aber bei guter Begründung abwägbar.','Kann-Kriterien sind optionale Zusatznutzen.'],
- ['Hardware','Welche Aufgaben hat der Arbeitsspeicher?','RAM hält aktuell benötigte Programme und Daten schnell verfügbar; sein Inhalt ist flüchtig.','Zu wenig RAM führt oft zu langsamem Paging.'],
- ['Hardware','SSD oder HDD für einen Büro-PC?','Eine SSD bietet deutlich kürzere Zugriffszeiten, ist leise und robust; HDDs sind oft günstiger pro TB.','Die Entscheidung muss zum Kapazitäts- und Leistungsbedarf passen.'],
- ['Beschaffung','Wie entsteht der Bareinkaufspreis?','Listeneinkaufspreis minus Rabatt ergibt Zieleinkaufspreis; minus Skonto ergibt Bareinkaufspreis.','Bezugskosten führen anschließend zum Bezugspreis.'],
- ['Wirtschaft','Wie funktioniert eine Nutzwertanalyse?','Kriterien gewichten, Alternativen bewerten, Gewichtung und Bewertung multiplizieren und Teilnutzen summieren.','Gewichtungen sollten zusammen 100 % ergeben.'],
- ['Netzwerk','Welche vier Werte erhält ein Client typischerweise per DHCP?','IP-Adresse, Netzmaske/Präfix, Default Gateway und DNS-Server.','Zusätzliche DHCP-Optionen sind möglich.'],
- ['Netzwerk','Was macht DNS?','DNS löst Namen in IP-Adressen und andere Ressourcendaten auf.','Ein A-Record verweist auf IPv4, AAAA auf IPv6.'],
- ['Netzwerk','Wie viele nutzbare Hosts hat ein /27-Netz?','30 Hosts: fünf Hostbits ergeben 32 Adressen minus Netz- und Broadcastadresse.','Formel: 2^Hostbits − 2.'],
- ['Sicherheit','Welche klassischen Schutzziele gibt es?','Vertraulichkeit, Integrität und Verfügbarkeit.','Maßnahmen sollten einem konkreten Risiko und Schutzziel zugeordnet werden.'],
- ['Sicherheit','Was bedeutet Least Privilege?','Benutzer und Programme erhalten nur die Rechte, die sie für ihre Aufgabe benötigen.','Administrative Konten nicht für Alltagsarbeit verwenden.'],
- ['Datenschutz','Was bedeutet Datensparsamkeit?','Nur die für einen festgelegten Zweck notwendigen personenbezogenen Daten verarbeiten.','Dazu gehören auch angemessene Löschfristen.'],
- ['Backup','Warum ist ein Restore-Test wichtig?','Nur die erfolgreiche Wiederherstellung beweist, dass eine Sicherung im Ernstfall nutzbar ist.','Ein vorhandenes Backup ist noch kein garantierter Restore.'],
- ['Qualität','Was gehört in einen Testfall?','Voraussetzungen, Testschritte, Eingaben, erwartetes Ergebnis, tatsächliches Ergebnis und Bewertung.','Tests müssen reproduzierbar sein.'],
- ['Übergabe','Was dokumentiert ein Abnahmeprotokoll?','Gelieferte Leistungen, durchgeführte Prüfungen, Ergebnis, offene Punkte sowie Bestätigung der Beteiligten.','Restmängel und Fristen klar festhalten.'],
- ['Kommunikation','Was macht eine Kundeneinweisung zielgruppengerecht?','Passende Sprache, Bezug zu den Aufgaben, praktische Übungen und eine Kontrolle, ob die Bedienung verstanden wurde.','Fachbegriffe erklären statt voraussetzen.'],
- ['Energie','Wie berechnet man elektrische Energie?','E = P × t; für kWh Leistung in kW mit Zeit in Stunden multiplizieren.','200 W × 8 h = 1,6 kWh.'],
- ['Software','Was ist bei Softwarelizenzen zu prüfen?','Nutzungsart, Geräte-/Benutzerzahl, Laufzeit, Übertragbarkeit und ob genügend Lizenzen vorhanden sind.','Open Source bedeutet nicht automatisch ohne Bedingungen.'],
- ['Logik','Was bewirkt eine If-Anweisung?','Sie führt einen Programmblock abhängig davon aus, ob eine Bedingung wahr oder falsch ist.','Bei mehreren Fällen Reihenfolge und Exklusivität prüfen.']
-];
+function renderPlan(){
+  document.getElementById('planList').innerHTML=plan.map((p,i)=>`<label class="plan-item ${state.done.includes(i)?'done':''}"><input type="checkbox" data-i="${i}" ${state.done.includes(i)?'checked':''}><span><strong>${p[0]} · ${p[1]}</strong></span><span class="pill">${p[2]}</span></label>`).join('');
+  document.querySelectorAll('#planList input').forEach(x=>x.onchange=()=>{
+    const i=+x.dataset.i;
+    if(x.checked&&!state.done.includes(i))state.done.push(i);
+    if(!x.checked)state.done=state.done.filter(n=>n!==i);
+    save();renderPlan();updateOverall();
+  });
+}
+function updateOverall(){
+  const pct=Math.round((state.done.length/plan.length)*100);
+  document.getElementById('overallBar').style.width=pct+'%';
+  document.getElementById('overallDetail').textContent=`${pct}% · ${state.done.length} von ${plan.length} Etappen erledigt`;
+}
+document.getElementById('reset').onclick=()=>{
+  if(confirm('Wirklich den gesamten Lernfortschritt löschen?')){
+    state.done=[];state.hwKnown=[];state.nwKnown=[];state.hwQuizRight=0;state.hwQuizTotal=0;state.nwQuizRight=0;state.nwQuizTotal=0;
+    save();renderPlan();updateOverall();renderCard('hw');renderCard('nw');updateQuizScore('hw');updateQuizScore('nw');
+  }
+};
 
-const ap2Questions=[
- {t:'Subnetting',q:'Ein Unternehmen benötigt mindestens 50 Hostadressen pro Subnetz. Welches kleinste IPv4-Präfix genügt?',o:['/27','/26','/25','/24'],a:1,e:'Mit 6 Hostbits entstehen 2⁶ − 2 = 62 nutzbare Adressen. 32 − 6 = /26.'},
- {t:'RAID',q:'Welche Nutzkapazität hat RAID 6 mit fünf gleich großen 4-TB-Platten?',o:['12 TB','16 TB','20 TB','8 TB'],a:0,e:'RAID 6 nutzt die Kapazität von zwei Platten für doppelte Parität: (5 − 2) × 4 TB = 12 TB.'},
- {t:'Sicherheit',q:'Welche Maßnahme schützt primär die Integrität einer übertragenen Datei?',o:['Komprimierung','Hashwertvergleich','RAID 1','NAT'],a:1,e:'Ein kryptografischer Hash macht Veränderungen erkennbar.'},
- {t:'Netzwerk',q:'Ein Client erhält 169.254.12.8. Was ist die wahrscheinlichste Ursache?',o:['DNS-Ausfall','DHCP nicht erreichbar','Falsche Zeitzone','Defektes TLS-Zertifikat'],a:1,e:'169.254.0.0/16 ist APIPA/Link-Local und wird typischerweise genutzt, wenn kein DHCP-Lease zustande kommt.'},
- {t:'Backup',q:'Welche Aussage ist richtig?',o:['RAID 5 ersetzt ein Backup','Snapshots sind immer offline','Ein Restore-Test gehört zur Backupstrategie','Inkrementelle Backups brauchen nie ein Vollbackup'],a:2,e:'Nur ein getesteter Restore zeigt, ob die Sicherung im Ernstfall nutzbar ist.'},
- {t:'IPv6',q:'Welche Präfixlänge wird typischerweise für ein einzelnes IPv6-LAN verwendet?',o:['/32','/48','/64','/128'],a:2,e:'/64 lässt 64 Bit für die Interface-ID und ist der übliche LAN-Präfix.'},
- {t:'Kryptografie',q:'Womit wird eine digitale Signatur geprüft?',o:['Privater Schlüssel des Empfängers','Öffentlicher Schlüssel des Unterzeichners','Hash ohne Schlüssel','Passwort des Unterzeichners'],a:1,e:'Signiert wird mit dem privaten, geprüft mit dem zugehörigen öffentlichen Schlüssel.'},
- {t:'Virtualisierung',q:'Welcher Vorteil ist typisch für virtuelle Maschinen?',o:['Keine Ressourcenbegrenzung','Starke Isolation unterschiedlicher Gastbetriebssysteme','Sie benötigen nie Updates','Sie ersetzen Backups'],a:1,e:'VMs kapseln vollständige Gastbetriebssysteme und erlauben unterschiedliche Betriebssysteme auf einem Host.'},
- {t:'SQL',q:'Welche Abfrage zählt Geräte je Standort?',o:['SELECT standort, COUNT(*) FROM geraet GROUP BY standort;','SELECT COUNT(standort) FROM geraet ORDER BY standort;','SELECT standort FROM geraet COUNT(*);','GROUP geraet BY standort;'],a:0,e:'Aggregatfunktionen pro Gruppe benötigen GROUP BY.'},
- {t:'Wirtschaft',q:'Eine Investition kostet 18.000 € und spart jährlich 6.000 €. Wann amortisiert sie sich rechnerisch?',o:['2 Jahre','3 Jahre','4 Jahre','6 Jahre'],a:1,e:'18.000 € ÷ 6.000 €/Jahr = 3 Jahre.'},
- {t:'VLAN',q:'Was ist für die Kommunikation zwischen zwei VLANs erforderlich?',o:['Hub','Layer-3-Routing','Nur ein Trunkkabel','DNSSEC'],a:1,e:'VLANs sind getrennte Layer-2-Broadcast-Domänen. Verkehr dazwischen muss geroutet werden.'},
- {t:'Service',q:'Was beschreibt ein SLA am besten?',o:['Quellcode-Lizenz','Vereinbarte Servicequalität und Reaktionszeiten','Liste aller Benutzerkonten','Netzwerkplan'],a:1,e:'Ein Service Level Agreement legt messbare Leistungs- und Qualitätsziele fest.'},
- {t:'STP',q:'Warum blockiert STP unter Umständen einen physisch funktionierenden Switch-Port?',o:['Um DNS zu beschleunigen','Um eine Layer-2-Schleife zu verhindern','Um DHCP zu ersetzen','Um VLAN-Tags zu entfernen'],a:1,e:'Redundante aktive Layer-2-Pfade können Broadcast-Stürme und instabile MAC-Tabellen verursachen.'},
- {t:'DNSSEC',q:'Welche Aussage zu DNSSEC stimmt?',o:['Es verschlüsselt jede DNS-Abfrage','Es ersetzt TLS','Es signiert DNS-Daten kryptografisch','Es vergibt IP-Adressen'],a:2,e:'DNSSEC schützt Authentizität und Integrität der DNS-Antwort, aber nicht deren Vertraulichkeit.'},
- {t:'Firewall/NAT',q:'Ein interner Server soll aus dem Internet über TCP 443 erreichbar sein. Was wird typischerweise benötigt?',o:['Portweiterleitung/DNAT plus passende Firewallregel','Nur ein DNS-A-Record','Ein zusätzlicher DHCP-Lease','STP PortFast'],a:0,e:'DNS liefert nur die Zieladresse. Die Firewall beziehungsweise der Router muss den Verkehr erlauben und bei privater Zieladresse übersetzen.'},
- {t:'Link Aggregation',q:'Welches Protokoll wird häufig zur dynamischen Aushandlung eines Link-Bündels verwendet?',o:['LACP','ARP','NTP','SNMP'],a:0,e:'LACP nach IEEE 802.1AX/802.3ad bündelt kompatible Ethernet-Links.'},
- {t:'USV',q:'Welche USV-Klasse versorgt die Last dauerhaft über einen Wechselrichter?',o:['VFD/Offline','VI/Line-interactive','VFI/Online','Keine davon'],a:2,e:'Bei VFI erfolgt eine doppelte Wandlung; die Ausgangsseite ist weitgehend von Spannung und Frequenz des Eingangs unabhängig.'},
- {t:'Übertragung',q:'10 GiB sollen netto über 1 Gbit/s übertragen werden. Welche ideale Mindestzeit liegt ohne Overhead am nächsten?',o:['ca. 10 s','ca. 86 s','ca. 800 s','ca. 1 s'],a:1,e:'10 GiB × 8 ≈ 85,9 Gbit. Geteilt durch 1 Gbit/s sind das etwa 86 Sekunden.'},
- {t:'Routing',q:'Welche Route wird verwendet, wenn mehrere Routingtabelleneinträge zum Ziel passen?',o:['Die zuerst konfigurierte','Die Route mit dem längsten passenden Präfix','Immer die Default Route','Die Route mit der größten Netzmaske als Dezimalzahl'],a:1,e:'Router wählen grundsätzlich den spezifischsten Treffer: Longest Prefix Match.'},
- {t:'MDM',q:'Welche MDM-Maßnahme reduziert bei Geräteverlust unmittelbar das Datenrisiko?',o:['Remote-Löschung und erzwungene Gerätevollverschlüsselung','Höhere Displayhelligkeit','Deaktiviertes WLAN','Größerer Gerätespeicher'],a:0,e:'Verschlüsselung schützt ruhende Daten; Remote-Wipe kann verwaltete Daten nach Verlust entfernen.'}
-];
+/* ---------- flashcard decks ---------- */
+const decks={
+ hw:[
+  ['Architektur','Woraus besteht die klassische von-Neumann-Architektur?','Steuerwerk, Rechenwerk (ALU), Speicher, Ein-/Ausgabewerk, verbunden über einen Bus.','Die Grafikkarte ist Peripherie, kein Kernbestandteil.'],
+  ['Speicher','Was unterscheidet RAM von ROM?','RAM ist flüchtig (Inhalt geht bei Stromausfall verloren), ROM ist nicht-flüchtig / dauerhaft.','RAM = Arbeitsspeicher, ROM = Festwertspeicher.'],
+  ['Speicher','Hauptunterschied SSD vs. HDD?','SSD hat keine beweglichen Teile (Flash-Speicher), HDD arbeitet mechanisch mit rotierenden Magnetscheiben.','SSD ist deshalb schneller und robuster.'],
+  ['Grundlagen','Wie viele Bit sind 1 Byte?','8 Bit.','1 Byte kann Werte von 0–255 (unsigned) darstellen.'],
+  ['Schnittstellen','Welche Schnittstelle überträgt Bild UND Ton?','HDMI.','VGA überträgt nur Bild, kein Ton.'],
+  ['Bus-System','Wozu dient der Datenbus?','Übertragung von Daten/Signalen zwischen den Komponenten eines Rechners.','Es gibt auch Adressbus und Steuerbus.'],
+  ['Zahlensysteme','Wie rechnet man Hex direkt in Binär um?','Jede Hex-Ziffer = 4 Bit (Nibble). Einfach jede Ziffer einzeln in ihr 4-Bit-Muster übersetzen.','Beispiel: 4C → 0100 1100.']
+ ],
+ nw:[
+  ['OSI','Nenne alle 7 OSI-Schichten in Reihenfolge (1→7).','Bitübertragung, Sicherung, Vermittlung, Transport, Sitzung, Darstellung, Anwendung.','Eselsbrücke: Bitte Sei Vorsichtig Trink Sie Doch Alkoholfrei.'],
+  ['Protokolle','Unterschied TCP vs. UDP?','TCP ist verbindungsorientiert und gesichert (mit Bestätigung), UDP ist verbindungslos und schneller, aber ungesichert.','TCP z.B. für Webseiten, UDP z.B. für Streaming.'],
+  ['IP-Adressen','Wie viele Bit hat eine IPv4-Adresse?','32 Bit, aufgeteilt in 4 Oktette à 8 Bit.','Dargestellt als 4 Dezimalzahlen 0-255, getrennt durch Punkte.'],
+  ['Subnetting','Formel für nutzbare Hosts?','2^Hostbits − 2 (minus Netz- und Broadcastadresse).','Beispiel /27: 5 Hostbits → 2⁵−2 = 30 Hosts.'],
+  ['Subnetting','Formel für die Blockgröße im letzten betroffenen Oktett?','256 − Maskenwert.','Beispiel /26: Maske 192 → Blockgröße 64.'],
+  ['DHCP','Was macht ein DHCP-Server?','Vergibt automatisch IP-Adresse, Subnetzmaske, Gateway und DNS-Server an Geräte im Netzwerk.','Ohne DHCP müsste jedes Gerät manuell konfiguriert werden.'],
+  ['MAC-Adresse','Was ist eine MAC-Adresse und wo liegt sie im OSI-Modell?','Physische Hardware-Adresse der Netzwerkkarte, Schicht 2 (Sicherungsschicht).','48 Bit lang, meist als 12 Hex-Ziffern geschrieben.'],
+  ['Private IPs','Welcher Bereich gehört zum privaten Klasse-C-Netz?','192.168.0.0 – 192.168.255.255.','Weitere private Bereiche: 10.0.0.0/8 und 172.16.0.0/12.']
+ ]
+};
+let cardIndex={hw:0,nw:0};
+function renderCard(key){
+  const c=decks[key][cardIndex[key]];
+  const el=document.getElementById('flash-'+key);
+  el.classList.remove('revealed');
+  document.getElementById(key+'CardTopic').textContent=c[0];
+  document.getElementById(key+'CardQuestion').textContent=c[1];
+  document.getElementById(key+'CardAnswer').textContent=c[2];
+  document.getElementById(key+'CardHint').textContent=c[3];
+  const knownArr=state[key+'Known'];
+  document.getElementById(key+'CardCount').textContent=`Karte ${cardIndex[key]+1} von ${decks[key].length} · ${knownArr.length} gewusst`;
+}
+['hw','nw'].forEach(key=>{
+  document.getElementById('flash-'+key).onclick=()=>document.getElementById('flash-'+key).classList.toggle('revealed');
+  document.getElementById(key+'Known').onclick=()=>{
+    if(!state[key+'Known'].includes(cardIndex[key]))state[key+'Known'].push(cardIndex[key]);
+    save();cardIndex[key]=(cardIndex[key]+1)%decks[key].length;renderCard(key);
+  };
+  document.getElementById(key+'Again').onclick=()=>{cardIndex[key]=(cardIndex[key]+1)%decks[key].length;renderCard(key);};
+});
 
-const questions=[
- {t:'Kundenbedarf',q:'Eine Anforderung ist für den Geschäftsbetrieb unverzichtbar. Wie sollte sie eingestuft werden?',o:['Kann-Kriterium','Muss-Kriterium','Bonusmerkmal','Nachtrag'],a:1,e:'Ein Muss-Kriterium muss erfüllt sein; andernfalls ist die Lösung ungeeignet.'},
- {t:'Hardware',q:'Welche Aufrüstung beschleunigt einen PC besonders, wenn ständig Daten aus dem langsamen Auslagerungsspeicher nachgeladen werden?',o:['Mehr Arbeitsspeicher','Größerer Monitor','Stärkeres Netzteil','Zusätzliche Maus'],a:0,e:'Zu wenig RAM führt zu häufigem Paging. Mehr Arbeitsspeicher reduziert die langsamen Zugriffe auf das Laufwerk.'},
- {t:'Beschaffung',q:'Der Listeneinkaufspreis beträgt 1.000 €. Es gibt 10 % Rabatt und anschließend 2 % Skonto. Wie hoch ist der Bareinkaufspreis?',o:['880 €','882 €','900 €','980 €'],a:1,e:'1.000 € − 10 % = 900 €. Davon 2 % Skonto abziehen: 900 € × 0,98 = 882 €.'},
- {t:'Nutzwertanalyse',q:'Wie entsteht der gewichtete Teilnutzen eines Kriteriums?',o:['Gewichtung + Bewertung','Gewichtung × Bewertung','Bewertung ÷ Kaufpreis','Kaufpreis × Anzahl'],a:1,e:'Für jedes Kriterium werden Gewichtung und Bewertung multipliziert; danach werden die Teilnutzen addiert.'},
- {t:'Netzwerk',q:'Welche Einstellung benötigt ein Client, um Ziele außerhalb seines eigenen IP-Netzes zu erreichen?',o:['Default Gateway','Computername','Druckertreiber','Dateiendung'],a:0,e:'Pakete in fremde Netze werden an das Standardgateway übergeben.'},
- {t:'DHCP',q:'Welche Aufgabe übernimmt DHCP typischerweise?',o:['Namen in IP-Adressen übersetzen','IP-Konfiguration automatisch verteilen','Dateien verschlüsseln','Webseiten filtern'],a:1,e:'DHCP vergibt unter anderem IP-Adresse, Netzmaske, Gateway und DNS-Server.'},
- {t:'DNS',q:'Ein Client erreicht einen Server per IP-Adresse, aber nicht per Namen. Wo liegt der Fehler wahrscheinlich?',o:['DNS/Namensauflösung','Grafikkarte','Arbeitsspeicher','USV'],a:0,e:'Die IP-Verbindung funktioniert. Damit ist die Namensauflösung der naheliegende Prüfpunkt.'},
- {t:'IPv4',q:'Wie viele nutzbare Hostadressen bietet ein klassisches /28-IPv4-Subnetz?',o:['8','14','16','30'],a:1,e:'Vier Hostbits ergeben 16 Adressen; Netz- und Broadcastadresse abgezogen bleiben 14.'},
- {t:'WLAN',q:'Welche Einstellung bietet für ein modernes Unternehmens-WLAN die stärkste Wahl?',o:['Offenes WLAN','WEP','WPA2/WPA3-Enterprise mit 802.1X','Versteckte SSID ohne Kennwort'],a:2,e:'Enterprise-Authentisierung mit aktuellen WPA-Verfahren erlaubt individuelle Identitäten und starke Verschlüsselung.'},
- {t:'Sicherheit',q:'Welche Maßnahme folgt dem Prinzip der minimalen Rechte?',o:['Alle Benutzer sind lokale Administratoren','Benutzer erhalten nur erforderliche Berechtigungen','Ein gemeinsames Teamkennwort','Updates werden deaktiviert'],a:1,e:'Least Privilege begrenzt Rechte auf das für die Aufgabe notwendige Maß.'},
- {t:'Datenschutz',q:'Welche Aussage beschreibt Datensparsamkeit?',o:['Alle verfügbaren Daten vorsorglich speichern','Nur notwendige personenbezogene Daten verarbeiten','Daten ohne Zweck unbegrenzt behalten','Kennwörter im Klartext protokollieren'],a:1,e:'Es sollen nur Daten verarbeitet werden, die für den festgelegten Zweck erforderlich sind.'},
- {t:'Backup',q:'Welche Prüfung zeigt, ob eine Datensicherung wirklich brauchbar ist?',o:['Dateiname ansehen','Wiederherstellung testweise durchführen','Backup komprimieren','Speicherplatz schätzen'],a:1,e:'Erst ein Restore-Test belegt praktisch, dass Daten vollständig und verwendbar wiederhergestellt werden können.'},
- {t:'Qualität',q:'Was gehört in einen guten Testfall?',o:['Nur der Name des Prüfers','Ausgangslage, Schritte, erwartetes und tatsächliches Ergebnis','Nur das Kaufdatum','Ein beliebiger Screenshot'],a:1,e:'Ein reproduzierbarer Testfall beschreibt Vorbereitung, Durchführung und überprüfbares Soll-/Ist-Ergebnis.'},
- {t:'Abnahme',q:'Welchen Zweck hat ein Abnahmeprotokoll?',o:['Es ersetzt die Datensicherung','Es dokumentiert geprüfte Leistung, Ergebnis und offene Punkte','Es vergibt IP-Adressen','Es installiert Treiber'],a:1,e:'Die Abnahme hält fest, was geliefert und geprüft wurde und ob Restmängel bestehen.'},
- {t:'Kundeneinweisung',q:'Welche Einweisung ist zielgruppengerecht?',o:['Nur Abkürzungen verwenden','Vorwissen berücksichtigen und Handlungen praktisch zeigen lassen','Dokumentation weglassen','Alle technischen Details ungefiltert vorlesen'],a:1,e:'Eine gute Einweisung knüpft an das Vorwissen an, verwendet passende Sprache und überprüft den Lernerfolg.'},
- {t:'Energie',q:'Ein Arbeitsplatz benötigt durchschnittlich 200 W und läuft 8 Stunden. Wie viel elektrische Energie sind das?',o:['0,025 kWh','1,6 kWh','25 kWh','1.600 kWh'],a:1,e:'0,2 kW × 8 h = 1,6 kWh.'},
- {t:'Software',q:'Was ist vor der Installation kommerzieller Software besonders zu prüfen?',o:['Nur die Symbolfarbe','Lizenzbedingungen und verfügbare Lizenzanzahl','Die Mausgeschwindigkeit','Der Desktop-Hintergrund'],a:1,e:'Die Nutzung muss vom Lizenzmodell und der vorhandenen Anzahl an Nutzungsrechten gedeckt sein.'},
- {t:'Updates',q:'Warum sollte ein Update vor breitem Rollout zunächst getestet werden?',o:['Damit es größer wird','Um Kompatibilitäts- und Funktionsprobleme früh zu erkennen','Um Kennwörter zu umgehen','Damit DHCP ausfällt'],a:1,e:'Ein begrenzter Test reduziert das Risiko, viele produktive Arbeitsplätze gleichzeitig zu beeinträchtigen.'},
- {t:'Logik',q:'Eine Schleife wird ausgeführt, solange i < 5 gilt. i startet bei 0 und wird jedes Mal um 1 erhöht. Wie oft läuft sie?',o:['4-mal','5-mal','6-mal','Unendlich'],a:1,e:'Die Durchläufe erfolgen für i = 0, 1, 2, 3 und 4, also fünfmal.'},
- {t:'Datenformate',q:'Welche Eigenschaft trifft auf XML zu?',o:['Elemente werden durch Tags strukturiert','XML kann nur Zahlen speichern','XML ist ein Bildformat','XML benötigt immer eine Datenbank'],a:0,e:'XML beschreibt hierarchische Daten mit öffnenden und schließenden Tags beziehungsweise leeren Elementen.'}
-];
+/* ---------- quizzes ---------- */
+const quizzes={
+ hw:[
+  {t:'Architektur',q:'Was gehört NICHT zur von-Neumann-Architektur?',o:['Steuerwerk','Rechenwerk (ALU)','Grafikkarte','Speicher'],a:2,e:'Die Grafikkarte ist ein Peripheriegerät, kein Kernbestandteil der Architektur.'},
+  {t:'Zahlensysteme',q:'26 (dezimal) in Binär?',o:['11010','11001','10110','11100'],a:0,e:'26 = 16+8+2 = 11010.'},
+  {t:'Grundlagen',q:'Wie viele Bit sind 1 Byte?',o:['4','8','16','1024'],a:1,e:'1 Byte = 8 Bit.'},
+  {t:'Speicher',q:'Welcher Speicher ist flüchtig?',o:['SSD','HDD','RAM','ROM'],a:2,e:'RAM verliert seinen Inhalt bei Stromausfall.'},
+  {t:'Schnittstellen',q:'Welche Schnittstelle überträgt Bild UND Ton?',o:['VGA','HDMI','PS/2','RJ45'],a:1,e:'HDMI überträgt sowohl Video- als auch Audiosignale.'},
+  {t:'Speicher',q:'Hauptunterschied SSD vs. HDD?',o:['SSD hat rotierende Scheiben','HDD nutzt Flash-Speicher','SSD hat keine beweglichen Teile, HDD arbeitet mechanisch','kein Unterschied'],a:2,e:'SSD = Flash-Speicher ohne bewegliche Teile, HDD = mechanisch mit rotierenden Magnetscheiben.'},
+  {t:'Zahlensysteme',q:'Hexadezimalzahl 1A entspricht welcher Dezimalzahl?',o:['26','16','30','10'],a:0,e:'1×16 + A(10) = 26.'},
+  {t:'Bus-System',q:'Aufgabe des Datenbus?',o:['Kühlung','Übertragung von Daten/Signalen zwischen Komponenten','Stromversorgung externer Geräte','Dauerhafte Speicherung'],a:1,e:'Der Bus verbindet und überträgt Signale zwischen den Komponenten.'}
+ ],
+ nw:[
+  {t:'OSI',q:'Wie viele Schichten hat das OSI-Modell?',o:['5','6','7','8'],a:2,e:'Das OSI-Modell hat 7 Schichten.'},
+  {t:'Protokolle',q:'Welches Protokoll ist verbindungsorientiert und gesichert?',o:['UDP','IP','TCP','ARP'],a:2,e:'TCP baut eine gesicherte Verbindung mit Bestätigung auf.'},
+  {t:'IP',q:'Wie viele Bit hat eine IPv4-Adresse?',o:['16','32','64','128'],a:1,e:'IPv4 = 32 Bit.'},
+  {t:'Subnetting',q:'Welche Subnetzmaske entspricht /24?',o:['255.255.0.0','255.255.255.0','255.0.0.0','255.255.255.255'],a:1,e:'/24 = 24 Bit gesetzt = 255.255.255.0.'},
+  {t:'DHCP',q:'Was macht ein DHCP-Server?',o:['Übersetzt Domainnamen','Vergibt automatisch IP-Adressen','Verschlüsselt Verkehr','Leitet Pakete zwischen Netzen'],a:1,e:'DHCP vergibt IP-Konfiguration automatisch an Clients.'},
+  {t:'MAC',q:'Wo im OSI-Modell liegt die MAC-Adresse?',o:['Schicht 3','Schicht 2','Schicht 4','Schicht 7'],a:1,e:'MAC-Adressen gehören zur Sicherungsschicht (Layer 2).'},
+  {t:'Subnetting',q:'Ein Netz braucht mind. 30 Hosts. Kleinstes passendes Präfix?',o:['/28','/27','/26','/25'],a:1,e:'/27 → 5 Hostbits → 2⁵−2 = 30 Hosts, passt exakt.'},
+  {t:'Private IPs',q:'Welcher Bereich ist privates Klasse-C-Netz?',o:['10.0.0.0/8','172.16.0.0/12','192.168.0.0/16','127.0.0.0/8'],a:2,e:'192.168.0.0 – 192.168.255.255 ist der private Klasse-C-Bereich.'}
+ ]
+};
+let quizIndex={hw:0,nw:0},answered={hw:false,nw:false};
+function shuffle(arr){return arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(v=>v[1]);}
+let quizOrder={hw:shuffle([...quizzes.hw.keys()]),nw:shuffle([...quizzes.nw.keys()])};
+function renderQuiz(key){
+  answered[key]=false;
+  const q=quizzes[key][quizOrder[key][quizIndex[key]]];
+  document.getElementById(key+'QuizTopic').textContent=q.t;
+  document.getElementById(key+'QuizQuestion').textContent=q.q;
+  document.getElementById(key+'Feedback').textContent='';
+  document.getElementById(key+'NextQuiz').hidden=true;
+  document.getElementById(key+'QuizOptions').innerHTML=q.o.map((o,i)=>`<button class="quiz-option" data-i="${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join('');
+  document.querySelectorAll('#'+key+'QuizOptions .quiz-option').forEach(b=>b.onclick=()=>answerQuiz(key,b,+b.dataset.i));
+}
+function answerQuiz(key,btn,i){
+  if(answered[key])return;answered[key]=true;
+  const q=quizzes[key][quizOrder[key][quizIndex[key]]];
+  state[key+'QuizTotal']++;
+  if(i===q.a){state[key+'QuizRight']++;btn.classList.add('correct');document.getElementById(key+'Feedback').innerHTML=`<strong style="color:var(--good)">Richtig.</strong> ${q.e}`;}
+  else{btn.classList.add('wrong');document.querySelectorAll('#'+key+'QuizOptions .quiz-option')[q.a].classList.add('correct');document.getElementById(key+'Feedback').innerHTML=`<strong style="color:var(--bad)">Noch nicht.</strong> ${q.e}`;}
+  save();updateQuizScore(key);document.getElementById(key+'NextQuiz').hidden=false;
+}
+function updateQuizScore(key){
+  document.getElementById(key+'QuizScore').textContent=`${state[key+'QuizRight']} / ${state[key+'QuizTotal']}`;
+  document.getElementById(key+'QuizBar').style.width=(state[key+'QuizTotal']?state[key+'QuizRight']/state[key+'QuizTotal']*100:0)+'%';
+}
+['hw','nw'].forEach(key=>{
+  document.getElementById(key+'NextQuiz').onclick=()=>{
+    quizIndex[key]=(quizIndex[key]+1)%quizzes[key].length;
+    if(quizIndex[key]===0)quizOrder[key]=shuffle([...quizzes[key].keys()]);
+    renderQuiz(key);
+  };
+});
 
-const state=JSON.parse(localStorage.getItem('it-ap1-state')||'{"done":[],"known":[],"quizRight":0,"quizTotal":0}');
-const save=()=>localStorage.setItem('it-ap1-state',JSON.stringify(state));
-document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button,.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.tab).classList.add('active')});
-document.getElementById('topicBars').innerHTML=topics.map((t,i)=>`<div class="topic"><div><strong>${t.name}</strong><small>${t.note}</small></div><div class="bar"><i style="width:${Math.min(100,t.weight/26*100)}%"></i></div><div><strong>${t.weight}%</strong><small>${t.level}</small></div></div>`).join('');
-function renderPlan(){document.getElementById('planList').innerHTML=plan.map((p,i)=>`<label class="plan-item ${state.done.includes(i)?'done':''}"><input type="checkbox" data-i="${i}" ${state.done.includes(i)?'checked':''}><span><strong>${p[0]} · ${p[1]}</strong></span><span class="pill">${p[2]}</span></label>`).join('');document.querySelectorAll('#planList input').forEach(x=>x.onchange=()=>{const i=+x.dataset.i;if(x.checked&&!state.done.includes(i))state.done.push(i);if(!x.checked)state.done=state.done.filter(n=>n!==i);save();renderPlan();updateOverall()})}
-function updateOverall(){const pct=Math.round((state.done.length/plan.length)*100);document.getElementById('overall').textContent=pct+' %';document.getElementById('scoreDetail').textContent=`${state.done.length} von ${plan.length} Tagen erledigt`}
-document.getElementById('reset').onclick=()=>{if(confirm('Wirklich den gesamten Lernfortschritt löschen?')){state.done=[];state.known=[];state.quizRight=0;state.quizTotal=0;save();renderPlan();updateOverall();renderCard();updateQuizScore()}};
-let cardIndex=0;function renderCard(){const c=cards[cardIndex];document.getElementById('flash').classList.remove('revealed');document.getElementById('cardTopic').textContent=c[0];document.getElementById('cardQuestion').textContent=c[1];document.getElementById('cardAnswer').textContent=c[2];document.getElementById('cardHint').textContent=c[3];document.getElementById('cardCount').textContent=`Karte ${cardIndex+1} von ${cards.length} · ${state.known.length} gewusst`}
-document.getElementById('flash').onclick=()=>document.getElementById('flash').classList.toggle('revealed');document.getElementById('known').onclick=()=>{if(!state.known.includes(cardIndex))state.known.push(cardIndex);save();cardIndex=(cardIndex+1)%cards.length;renderCard()};document.getElementById('again').onclick=()=>{cardIndex=(cardIndex+1)%cards.length;renderCard()};
-let quizIndex=0,answered=false;function renderQuiz(){answered=false;const q=questions[quizIndex];document.getElementById('quizTopic').textContent=q.t;document.getElementById('quizQuestion').textContent=q.q;document.getElementById('feedback').textContent='';document.getElementById('nextQuiz').hidden=true;document.getElementById('quizOptions').innerHTML=q.o.map((o,i)=>`<button class="quiz-option" data-i="${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join('');document.querySelectorAll('.quiz-option').forEach(b=>b.onclick=()=>answerQuiz(b,+b.dataset.i))}
-function answerQuiz(btn,i){if(answered)return;answered=true;const q=questions[quizIndex];state.quizTotal++;if(i===q.a){state.quizRight++;btn.classList.add('correct');document.getElementById('feedback').innerHTML=`<strong style="color:var(--good)">Richtig.</strong> ${q.e}`}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-option')[q.a].classList.add('correct');document.getElementById('feedback').innerHTML=`<strong style="color:var(--bad)">Noch nicht.</strong> ${q.e}`}save();updateQuizScore();document.getElementById('nextQuiz').hidden=false}
-function updateQuizScore(){document.getElementById('quizScore').textContent=`${state.quizRight} / ${state.quizTotal}`;document.getElementById('quizBar').style.width=(state.quizTotal?state.quizRight/state.quizTotal*100:0)+'%'}document.getElementById('nextQuiz').onclick=()=>{quizIndex=(quizIndex+1)%questions.length;renderQuiz()};
-renderPlan();updateOverall();renderCard();renderQuiz();updateQuizScore();
+/* ---------- Zahlensystem-Trainer ---------- */
+let currentNum=0;
+function newNumTask(){
+  currentNum=Math.floor(Math.random()*256);
+  document.getElementById('numDec').textContent=currentNum;
+  document.getElementById('numBinInput').value='';
+  document.getElementById('numHexInput').value='';
+  document.getElementById('numFeedback').textContent='';
+}
+document.getElementById('numCheck').onclick=()=>{
+  const bin=currentNum.toString(2).padStart(8,'0');
+  const hex=currentNum.toString(16).toUpperCase().padStart(2,'0');
+  const userBin=document.getElementById('numBinInput').value.trim().padStart(8,'0');
+  const userHex=document.getElementById('numHexInput').value.trim().toUpperCase().padStart(2,'0');
+  const okBin=userBin===bin,okHex=userHex===hex;
+  document.getElementById('numFeedback').innerHTML=
+    (okBin?'<span style="color:var(--good)">Binär richtig ✔</span>':`<span style="color:var(--bad)">Binär falsch ✘ (richtig: ${bin})</span>`)+
+    ' · '+
+    (okHex?'<span style="color:var(--good)">Hex richtig ✔</span>':`<span style="color:var(--bad)">Hex falsch ✘ (richtig: ${hex})</span>`);
+};
+document.getElementById('numNext').onclick=newNumTask;
+
+/* ---------- Subnetting-Trainer ---------- */
+let currentSub={};
+function ipToInt(a,b,c,d){return ((a<<24)|(b<<16)|(c<<8)|d)>>>0;}
+function intToIp(n){return [(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.');}
+function newSubTask(){
+  const octs=[Math.floor(Math.random()*223)+1,Math.floor(Math.random()*256),Math.floor(Math.random()*256),Math.floor(Math.random()*254)+1];
+  const prefix=[24,25,26,27,28,29,30][Math.floor(Math.random()*7)];
+  const ipInt=ipToInt(...octs);
+  const mask=prefix===0?0:((0xFFFFFFFF<<(32-prefix))>>>0);
+  const netInt=(ipInt&mask)>>>0;
+  const bcInt=(netInt|(~mask>>>0))>>>0;
+  const hostBits=32-prefix;
+  const hosts=Math.max(0,Math.pow(2,hostBits)-2);
+  currentSub={net:intToIp(netInt),broadcast:intToIp(bcInt),hosts};
+  document.getElementById('subIp').textContent=`${octs.join('.')} /${prefix}`;
+  document.getElementById('subNet').value='';document.getElementById('subBroadcast').value='';document.getElementById('subHosts').value='';
+  document.getElementById('subFeedback').textContent='';
+}
+document.getElementById('subCheck').onclick=()=>{
+  const okNet=document.getElementById('subNet').value.trim()===currentSub.net;
+  const okBc=document.getElementById('subBroadcast').value.trim()===currentSub.broadcast;
+  const okHosts=+document.getElementById('subHosts').value===currentSub.hosts;
+  document.getElementById('subFeedback').innerHTML=
+    `Netzadresse: ${okNet?'<span style="color:var(--good)">✔ richtig</span>':`<span style="color:var(--bad)">✘ richtig wäre ${currentSub.net}</span>`}<br>`+
+    `Broadcast: ${okBc?'<span style="color:var(--good)">✔ richtig</span>':`<span style="color:var(--bad)">✘ richtig wäre ${currentSub.broadcast}</span>`}<br>`+
+    `Nutzbare Hosts: ${okHosts?'<span style="color:var(--good)">✔ richtig</span>':`<span style="color:var(--bad)">✘ richtig wären ${currentSub.hosts}</span>`}`;
+};
+document.getElementById('subNext').onclick=newSubTask;
+
+/* ---------- init ---------- */
+renderPlan();updateOverall();
+renderCard('hw');renderCard('nw');
+renderQuiz('hw');renderQuiz('nw');updateQuizScore('hw');updateQuizScore('nw');
+newNumTask();newSubTask();
 </script>
 </body>
 </html>

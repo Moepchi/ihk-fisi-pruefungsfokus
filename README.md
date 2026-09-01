@@ -1,21 +1,27 @@
-# IHK-AP1 Lerntrainer
+# WBS Zwischenprüfung Lerntrainer
 
-Prüfungsorientierter Lerntrainer für die gemeinsame Abschlussprüfung Teil 1
-der IT-Berufe nach Ausbildungsordnung 2020.
+Lerntrainer für die interne Zwischenprüfung bei WBS Training
+(Fachinformatiker Systemintegration), durchgeführt nach IHK-Standard.
 
-Die Inhalte werden anhand der im Ordner `LernStuff/IHK & Prüfungen` vorhandenen
-Prüfungen priorisiert. Der Trainer läuft vollständig lokal im Browser.
+Die Prüfung besteht aus 5 Themenfeldern (je 20 % der Endnote):
+Wirtschafts- und Sozialkunde, Grundlagen Hardware/IT, Datenbanken,
+Netzwerke, Programmierung. Format: Multiple-Choice und Lückentexte
+(Dropdown-Menü).
 
 ## Start
 
-`index.html` doppelt anklicken.
+`index.html` doppelt anklicken, oder über GitHub Pages aufrufen.
 
-Der Lernfortschritt wird nur im lokalen Browser gespeichert.
+Der Lernfortschritt (Karteikarten, Quiz-Ergebnisse, abgehakter Plan)
+wird nur lokal im jeweiligen Browser gespeichert (localStorage).
 
-## Datenschutz und Quellen
+## Inhalt
 
-Die Anwendung enthält keine Originalprüfungen und keine privaten
-Schulunterlagen. Die Themenpriorisierung wurde aus lokal vorhandenen
-Prüfungsunterlagen, offiziellen IHK-Musteraufgaben und öffentlich verfügbaren
-Prüfungsrückblicken bis 2025 abgeleitet; alle Lernfragen und Erklärungen wurden
-für diesen Trainer neu formuliert.
+- **Überblick**: Fortschritt über alle 5 Themenfelder
+- **Zahlensysteme**: Referenztabelle + Umrechnungs-Trainer (Dezimal/Binär/Hex, zufällige Aufgaben)
+- **Hardware/IT**: Karteikarten + Quiz
+- **Netzwerke**: OSI-Referenztabelle, Karteikarten, Quiz, Subnetting-Trainer (zufällige Aufgaben)
+- **Datenbanken / Programmierung / Wirtschaft-Sozialkunde**: noch offen, werden in weiteren Lerneinheiten ergänzt
+- **Lernplan**: Fahrplan mit abhakbaren Etappen bis zum Prüfungstermin
+
+Prüfungstermin: 21.09.2026.
