@@ -209,39 +209,26 @@ code.inline{background:#1c2c46;padding:2px 6px;border-radius:6px;color:var(--blu
 <section id="sync" class="tab"><div class="grid">
 <article class="card span7">
 <h2>Sync zwischen deinen Geräten</h2>
-<p class="muted">Nutzt einen privaten GitHub Gist als einfachen Cloud-Speicher für deinen Lernfortschritt. Kein automatischer Live-Sync – du klickst bewusst "Hochladen" bzw. "Herunterladen", wenn du das Gerät wechselst.</p>
+<p class="muted">Kein Account, kein Cloud-Dienst, kein Login. Du exportierst deinen Lernstand als kurzen Text-Code, schickst ihn dir selbst aufs andere Gerät (z. B. per WhatsApp, Mail, Notizen-App) und importierst ihn dort. Funktioniert für dich und alle Mitschüler/innen gleich, ganz ohne Einrichtung.</p>
 
-<h3>1. Einmalig: Zugangs-Token erstellen</h3>
-<p>Öffne <a href="https://github.com/settings/tokens/new?scopes=gist&amp;description=WBS-ZP-Sync" target="_blank" rel="noopener">github.com/settings/tokens/new</a> (Scope <code class="inline">gist</code> ist schon vorausgewählt), gib eine Ablaufzeit an und klicke "Generate token". Kopiere den Token direkt danach – er wird nur einmal angezeigt.</p>
-<div class="trainer-row">
-<label>GitHub Token (nur <code class="inline">gist</code>-Rechte nötig) <input id="syncToken" type="password" placeholder="ghp_..."></label>
-</div>
-<div class="controls"><button class="btn" id="syncSaveToken">Token in diesem Browser speichern</button></div>
+<h3>Exportieren (auf dem Gerät, mit dem du gerade gelernt hast)</h3>
+<div class="controls"><button class="btn primary" id="syncExport">Fortschritt exportieren</button></div>
+<textarea id="syncExportBox" readonly rows="4" style="width:100%;margin-top:10px;background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px;font-family:monospace;font-size:.78rem;display:none"></textarea>
+<div class="controls" id="syncCopyRow" style="display:none"><button class="btn" id="syncCopy">In Zwischenablage kopieren</button></div>
 
-<h3 style="margin-top:22px">2. Gist verbinden</h3>
-<p class="muted">Auf dem <strong>ersten</strong> Gerät: Gist erstellen. Die angezeigte Gist-ID danach auf dem <strong>zweiten</strong> Gerät hier eintragen und verbinden.</p>
-<div class="trainer-row">
-<label>Gist-ID <input id="syncGistId" placeholder="wird nach Erstellung angezeigt"></label>
-</div>
-<div class="controls">
-<button class="btn" id="syncCreateGist">Neuen Sync-Gist erstellen</button>
-<button class="btn" id="syncSaveGistId">Gist-ID speichern (auf 2. Gerät)</button>
-</div>
+<h3 style="margin-top:22px">Importieren (auf dem anderen Gerät)</h3>
+<textarea id="syncImportBox" rows="4" placeholder="Code hier einfügen…" style="width:100%;background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px;font-family:monospace;font-size:.78rem"></textarea>
+<div class="controls"><button class="btn primary" id="syncImport">Importieren (überschreibt lokalen Stand)</button></div>
 
-<h3 style="margin-top:22px">3. Synchronisieren</h3>
-<div class="controls">
-<button class="btn primary" id="syncUpload">📤 Hochladen (dieses Gerät → Gist)</button>
-<button class="btn primary" id="syncDownload">📥 Herunterladen (Gist → dieses Gerät)</button>
-</div>
 <div class="feedback" id="syncStatus"></div>
 </article>
 <aside class="card span5">
 <h2>Wichtig zu wissen</h2>
 <ul>
-<li>Der Token wird nur lokal in <em>diesem</em> Browser gespeichert (localStorage) und nur direkt an die GitHub-API gesendet – nirgendwo sonst hin.</li>
-<li>Der Gist ist <strong>privat</strong> (nicht öffentlich gelistet), aber jeder mit Token+ID könnte ihn lesen/schreiben – nicht weitergeben.</li>
-<li>"Herunterladen" überschreibt den lokalen Fortschritt auf diesem Gerät komplett mit dem Stand aus dem Gist.</li>
-<li>Reihenfolge beim Gerätewechsel: erst auf dem Gerät, mit dem du zuletzt gelernt hast, <strong>hochladen</strong>, dann auf dem anderen Gerät <strong>herunterladen</strong>.</li>
+<li>Der Code enthält deinen gesamten Lernfortschritt (Karteikarten, Quiz-Ergebnisse, abgehakter Plan) – schick ihn nur dir selbst zu, nicht an andere, sonst überschreibt ihr euch gegenseitig den Stand.</li>
+<li>"Importieren" überschreibt den lokalen Fortschritt auf diesem Gerät komplett mit dem importierten Stand.</li>
+<li>Läuft komplett ohne Internet-Zwischenspeicher und ohne Drittanbieter-Dienst – reine Text-Kopie, kann also nicht "kaputtgehen" oder plötzlich Zugangsdaten verlangen.</li>
+<li>Reihenfolge beim Gerätewechsel: erst auf dem Gerät, mit dem du zuletzt gelernt hast, <strong>exportieren</strong>, dann auf dem anderen Gerät <strong>importieren</strong>.</li>
 </ul>
 </aside>
 </div></section>
@@ -463,77 +450,42 @@ document.getElementById('subCheck').onclick=()=>{
 };
 document.getElementById('subNext').onclick=newSubTask;
 
-/* ---------- Sync via GitHub Gist ---------- */
-const GIST_FILE='wbs-zp-state.json';
+/* ---------- Sync via Export/Import-Code (kein Netzwerk, kein Login) ---------- */
 function syncStatus(msg,ok){
   const el=document.getElementById('syncStatus');
   el.innerHTML=`<span style="color:${ok===false?'var(--bad)':ok===true?'var(--good)':'var(--muted)'}">${msg}</span>`;
 }
-function getToken(){return localStorage.getItem('wbs-zp-token')||'';}
-function getGistId(){return localStorage.getItem('wbs-zp-gistid')||'';}
-document.getElementById('syncToken').value=getToken();
-document.getElementById('syncGistId').value=getGistId();
+function b64encode(str){return btoa(unescape(encodeURIComponent(str)));}
+function b64decode(str){return decodeURIComponent(escape(atob(str)));}
 
-document.getElementById('syncSaveToken').onclick=()=>{
-  const t=document.getElementById('syncToken').value.trim();
-  if(!t){syncStatus('Bitte zuerst einen Token eingeben.',false);return;}
-  localStorage.setItem('wbs-zp-token',t);
-  syncStatus('Token gespeichert (nur in diesem Browser).',true);
+document.getElementById('syncExport').onclick=()=>{
+  const code=b64encode(JSON.stringify(state));
+  const box=document.getElementById('syncExportBox');
+  box.value=code;box.style.display='block';
+  document.getElementById('syncCopyRow').style.display='flex';
+  syncStatus('Code erzeugt – kopieren und aufs andere Gerät übertragen.',true);
 };
-document.getElementById('syncSaveGistId').onclick=()=>{
-  const id=document.getElementById('syncGistId').value.trim();
-  if(!id){syncStatus('Bitte zuerst eine Gist-ID eingeben.',false);return;}
-  localStorage.setItem('wbs-zp-gistid',id);
-  syncStatus('Gist-ID gespeichert. Du kannst jetzt Hochladen/Herunterladen.',true);
-};
-document.getElementById('syncCreateGist').onclick=async()=>{
-  const token=getToken();
-  if(!token){syncStatus('Bitte zuerst den Token eingeben und speichern.',false);return;}
-  syncStatus('Erstelle Gist…');
+document.getElementById('syncCopy').onclick=async()=>{
+  const box=document.getElementById('syncExportBox');
   try{
-    const res=await fetch('https://api.github.com/gists',{
-      method:'POST',
-      headers:{'Authorization':'token '+token,'Accept':'application/vnd.github+json'},
-      body:JSON.stringify({description:'WBS Zwischenprüfung Lernfortschritt',public:false,files:{[GIST_FILE]:{content:JSON.stringify(state)}}})
-    });
-    if(!res.ok)throw new Error('HTTP '+res.status);
-    const data=await res.json();
-    localStorage.setItem('wbs-zp-gistid',data.id);
-    document.getElementById('syncGistId').value=data.id;
-    syncStatus(`Gist erstellt. ID: <strong>${data.id}</strong> – trag diese ID auf deinem anderen Gerät im Feld "Gist-ID" ein.`,true);
-  }catch(e){syncStatus('Fehler beim Erstellen: '+e.message+' (Token korrekt? gist-Rechte?)',false);}
+    await navigator.clipboard.writeText(box.value);
+    syncStatus('In die Zwischenablage kopiert.',true);
+  }catch(e){
+    box.select();
+    syncStatus('Automatisches Kopieren nicht möglich – Text ist markiert, mit Strg+C kopieren.',false);
+  }
 };
-document.getElementById('syncUpload').onclick=async()=>{
-  const token=getToken(),gistId=getGistId();
-  if(!token||!gistId){syncStatus('Token und Gist-ID werden benötigt.',false);return;}
-  syncStatus('Lade hoch…');
-  try{
-    const res=await fetch('https://api.github.com/gists/'+gistId,{
-      method:'PATCH',
-      headers:{'Authorization':'token '+token,'Accept':'application/vnd.github+json'},
-      body:JSON.stringify({files:{[GIST_FILE]:{content:JSON.stringify(state)}}})
-    });
-    if(!res.ok)throw new Error('HTTP '+res.status);
-    syncStatus('Hochgeladen · '+new Date().toLocaleString('de-DE'),true);
-  }catch(e){syncStatus('Fehler beim Hochladen: '+e.message,false);}
-};
-document.getElementById('syncDownload').onclick=async()=>{
-  const token=getToken(),gistId=getGistId();
-  if(!token||!gistId){syncStatus('Token und Gist-ID werden benötigt.',false);return;}
+document.getElementById('syncImport').onclick=()=>{
+  const raw=document.getElementById('syncImportBox').value.trim();
+  if(!raw){syncStatus('Bitte zuerst einen Code einfügen.',false);return;}
   if(!confirm('Der lokale Fortschritt auf diesem Gerät wird überschrieben. Fortfahren?'))return;
-  syncStatus('Lade herunter…');
   try{
-    const res=await fetch('https://api.github.com/gists/'+gistId,{headers:{'Authorization':'token '+token,'Accept':'application/vnd.github+json'}});
-    if(!res.ok)throw new Error('HTTP '+res.status);
-    const data=await res.json();
-    const file=data.files[GIST_FILE];
-    if(!file)throw new Error('Datei nicht im Gist gefunden');
-    const remote=JSON.parse(file.content);
-    Object.assign(state,remote);
+    const parsed=JSON.parse(b64decode(raw));
+    Object.assign(state,parsed);
     save();
     renderPlan();updateOverall();renderCard('hw');renderCard('nw');updateQuizScore('hw');updateQuizScore('nw');
-    syncStatus('Heruntergeladen und übernommen · '+new Date().toLocaleString('de-DE'),true);
-  }catch(e){syncStatus('Fehler beim Herunterladen: '+e.message,false);}
+    syncStatus('Importiert und übernommen.',true);
+  }catch(e){syncStatus('Ungültiger Code: '+e.message,false);}
 };
 
 /* ---------- init ---------- */
