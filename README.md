@@ -21,7 +21,8 @@ wird nur lokal im jeweiligen Browser gespeichert (localStorage).
 - **Zahlensysteme**: Referenztabelle + Umrechnungs-Trainer (Dezimal/Binär/Hex, zufällige Aufgaben)
 - **Hardware/IT**: Karteikarten + Quiz
 - **Netzwerke**: OSI-Referenztabelle, Karteikarten, Quiz, Subnetting-Trainer (zufällige Aufgaben)
-- **Datenbanken / Programmierung / Wirtschaft-Sozialkunde**: noch offen, werden in weiteren Lerneinheiten ergänzt
+- **Datenbanken**: ER-Modell/Kardinalitäten-Referenz, SQL-Datentypen & Grundbefehle-Referenz, Karteikarten, Quiz
+- **Programmierung / Wirtschaft-Sozialkunde**: noch offen, werden in weiteren Lerneinheiten ergänzt
 - **Lernplan**: Fahrplan mit abhakbaren Etappen bis zum Prüfungstermin
 
 Prüfungstermin: 21.09.2026.

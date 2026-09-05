@@ -194,8 +194,58 @@ code.inline{background:#1c2c46;padding:2px 6px;border-radius:6px;color:var(--blu
 </div>
 </section>
 
+<!-- DATENBANKEN -->
+<section id="db" class="tab">
+<div class="grid">
+<article class="card span12">
+<h2>ER-Modell &amp; Kardinalitäten (Referenz)</h2>
+<p class="muted">Der Zwei-Fragen-Trick: "Wenn ich EINE Entität von A nehme, wie VIELE von B kann ich ihr höchstens zuordnen?" – und dieselbe Frage umgekehrt. Ergebnis sind zwei Zahlen (1 oder n).</p>
+<table class="ref"><tr><th>Kardinalität</th><th>Bedeutung</th><th>Fremdschlüssel-Regel</th></tr>
+<tr><td>1:1</td><td>Genau eine Entität auf jeder Seite (z. B. Land ↔ Hauptstadt)</td><td>FK auf beliebiger Seite möglich</td></tr>
+<tr><td>1:n</td><td>Eine Seite "1", die andere "mehrere" (z. B. Kunde ↔ Bestellung)</td><td>FK immer in der Tabelle mit Kardinalität „n“</td></tr>
+<tr><td>m:n</td><td>Beide Seiten "mehrere" (z. B. Schüler ↔ Kurs)</td><td>Zusätzliche Hilfstabelle mit beiden Primärschlüsseln als FK</td></tr>
+</table>
+<p class="muted">Normalisierung: <strong>1. NF</strong> = Attribute atomar (keine zusammengesetzten Werte) · <strong>2. NF</strong> = jede Tabelle hat einen eigenen künstlichen Primärschlüssel · <strong>3. NF</strong> = jede Tabelle ist „monothematisch“ (beschreibt nur einen Entitätstyp).</p>
+</article>
+
+<article class="card span6">
+<h2>Referenz: SQL-Datentypen &amp; Constraints</h2>
+<table class="ref"><tr><th>Typ/Constraint</th><th>Bedeutung</th></tr>
+<tr><td><code class="inline">INT(11)</code></td><td>Ganzzahl, z. B. für IDs</td></tr>
+<tr><td><code class="inline">VARCHAR(255)</code></td><td>Text (String)</td></tr>
+<tr><td><code class="inline">DATE</code></td><td>Kalenderdatum</td></tr>
+<tr><td><code class="inline">FLOAT(11,2)</code></td><td>Kommazahl (11 Stellen gesamt, 2 Nachkommastellen) – für Geld besser <code class="inline">DECIMAL</code>, exaktes Runden</td></tr>
+<tr><td><code class="inline">BOOLEAN</code></td><td>0 = FALSE, 1 = TRUE</td></tr>
+<tr><td><code class="inline">NOT NULL</code></td><td>Wert muss angegeben werden</td></tr>
+<tr><td><code class="inline">PRIMARY KEY</code></td><td>markiert den Primärschlüssel der Tabelle</td></tr>
+<tr><td><code class="inline">FOREIGN KEY … REFERENCES</code></td><td>verweist auf den Primärschlüssel einer anderen Tabelle</td></tr>
+<tr><td><code class="inline">AUTO_INCREMENT</code></td><td>automatische, fortlaufende ID-Vergabe</td></tr>
+</table>
+</article>
+<article class="card span6">
+<h2>Referenz: Grundbefehle</h2>
+<table class="ref"><tr><th>Befehl</th><th>Zweck</th></tr>
+<tr><td><code class="inline">CREATE DATABASE</code></td><td>neue Datenbank anlegen</td></tr>
+<tr><td><code class="inline">USE</code></td><td>in eine Datenbank wechseln</td></tr>
+<tr><td><code class="inline">CREATE TABLE</code></td><td>neue Tabelle anlegen</td></tr>
+<tr><td><code class="inline">ALTER TABLE … ADD/DROP/CHANGE/RENAME</code></td><td>Tabelle nachträglich ändern</td></tr>
+<tr><td><code class="inline">INSERT INTO … VALUES</code></td><td>Datensätze einfügen</td></tr>
+</table>
+<p class="muted">Reihenfolge beim Befüllen: erst Tabellen OHNE Fremdschlüssel, dann die Tabellen, die per FK darauf verweisen.</p>
+</article>
+
+<article id="flash-db" class="card flash span8" aria-live="polite">
+<div class="question"><div class="eyebrow" id="dbCardTopic"></div><h2 id="dbCardQuestion"></h2><p class="muted">Klicken, um die Antwort aufzudecken</p></div>
+<div class="answer"><div class="eyebrow">Antwort</div><h2 id="dbCardAnswer"></h2><p id="dbCardHint" class="muted"></p></div>
+</article>
+<aside class="card span4"><h2>Karteikarten</h2><p id="dbCardCount"></p><div class="controls"><button class="btn" id="dbAgain">Nochmal</button><button class="btn primary" id="dbKnown">Gewusst</button></div></aside>
+
+<article class="card span8"><div class="eyebrow" id="dbQuizTopic"></div><h2 id="dbQuizQuestion"></h2><div id="dbQuizOptions"></div><div id="dbFeedback" class="feedback" aria-live="polite"></div><button id="dbNextQuiz" class="btn primary" hidden>Nächste Aufgabe</button></article>
+<aside class="card span4"><h2>Quiz-Modus</h2><p><strong id="dbQuizScore">0 / 0</strong> richtig</p><div class="bar"><i id="dbQuizBar" style="width:0"></i></div></aside>
+</div>
+</section>
+
 <!-- STUBS -->
-<section id="db" class="tab"><div class="card soon"><h2>Datenbanken – noch nicht erarbeitet</h2><p class="muted">SQL-Grundlagen, Normalisierung, ER-Diagramme, JOINs folgen in einer der nächsten Lerneinheiten und werden hier ergänzt.</p></div></section>
 <section id="java" class="tab"><div class="card soon"><h2>Programmierung (Java) – noch nicht erarbeitet</h2><p class="muted">Grundlagen, Kontrollstrukturen, OOP-Konzepte folgen und werden hier ergänzt.</p></div></section>
 <section id="wiso" class="tab"><div class="card soon"><h2>Wirtschaft &amp; Sozialkunde – noch nicht erarbeitet</h2><p class="muted">Vertragsrecht, Sozialversicherung, Ausbildungsrecht etc. folgen und werden hier ergänzt.</p></div></section>
 
@@ -248,14 +298,15 @@ code.inline{background:#1c2c46;padding:2px 6px;border-radius:6px;color:var(--blu
 const topics=[
  {name:'Wirtschafts- und Sozialkunde',weight:20,status:'offen',note:'Vertragsrecht, Sozialversicherung, Ausbildung'},
  {name:'Grundlagen Hardware/IT',weight:20,status:'in Arbeit',note:'Architektur, Speicher, Zahlensysteme, Schnittstellen'},
- {name:'Datenbanken',weight:20,status:'offen',note:'SQL, Normalisierung, ER-Diagramme'},
+ {name:'Datenbanken',weight:20,status:'in Arbeit',note:'ER-Modell, Kardinalitäten, Normalisierung, SQL-Grundlagen'},
  {name:'Netzwerke',weight:20,status:'in Arbeit',note:'OSI, IP, Subnetting, Protokolle'},
  {name:'Programmierung',weight:20,status:'offen',note:'Java-Grundlagen, Kontrollstrukturen, OOP'}
 ];
 document.getElementById('topicBars').innerHTML=topics.map(t=>`<div class="topic"><div><strong>${t.name}</strong><small>${t.note}</small></div><div class="bar"><i style="width:${t.weight/20*100}%"></i></div><div><strong>${t.weight}%</strong><small>${t.status}</small></div></div>`).join('');
 
 /* ---------- shared state ---------- */
-const state=JSON.parse(localStorage.getItem('wbs-zp-state')||'{"done":[],"hwKnown":[],"nwKnown":[],"hwQuizRight":0,"hwQuizTotal":0,"nwQuizRight":0,"nwQuizTotal":0}');
+const defaultState={done:[],hwKnown:[],nwKnown:[],dbKnown:[],hwQuizRight:0,hwQuizTotal:0,nwQuizRight:0,nwQuizTotal:0,dbQuizRight:0,dbQuizTotal:0};
+const state=Object.assign({},defaultState,JSON.parse(localStorage.getItem('wbs-zp-state')||'{}'));
 const save=()=>localStorage.setItem('wbs-zp-state',JSON.stringify(state));
 
 /* ---------- tabs ---------- */
@@ -270,8 +321,8 @@ const plan=[
  ['Tag 3','Zahlensysteme: Dezimal/Binär/Hex sicher umrechnen','Hardware'],
  ['Tag 4-5','Netzwerke: OSI-Modell, IP-Grundlagen, TCP/UDP','Netzwerk'],
  ['Tag 6-7','Netzwerke: Subnetting üben (Netzadresse/Broadcast/Hosts)','Netzwerk'],
- ['Tag 8-9','Datenbanken: SQL-Grundlagen (SELECT, WHERE, JOIN)','Datenbanken'],
- ['Tag 10-11','Datenbanken: Normalisierung, ER-Diagramme','Datenbanken'],
+ ['Tag 8-9','Datenbanken: ER-Modell, Kardinalitäten, Normalisierung','Datenbanken'],
+ ['Tag 10-11','Datenbanken: SQL-Grundlagen (CREATE, ALTER, INSERT, Datentypen)','Datenbanken'],
  ['Tag 12-14','Programmierung: Java-Grundlagen, Kontrollstrukturen','Programmierung'],
  ['Tag 15-16','Programmierung: OOP-Konzepte, kleine Übungsprogramme','Programmierung'],
  ['Tag 17-18','Wirtschaft/Sozialkunde: Vertragsrecht, Ausbildung','WiSo'],
@@ -295,8 +346,8 @@ function updateOverall(){
 }
 document.getElementById('reset').onclick=()=>{
   if(confirm('Wirklich den gesamten Lernfortschritt löschen?')){
-    state.done=[];state.hwKnown=[];state.nwKnown=[];state.hwQuizRight=0;state.hwQuizTotal=0;state.nwQuizRight=0;state.nwQuizTotal=0;
-    save();renderPlan();updateOverall();renderCard('hw');renderCard('nw');updateQuizScore('hw');updateQuizScore('nw');
+    state.done=[];state.hwKnown=[];state.nwKnown=[];state.dbKnown=[];state.hwQuizRight=0;state.hwQuizTotal=0;state.nwQuizRight=0;state.nwQuizTotal=0;state.dbQuizRight=0;state.dbQuizTotal=0;
+    save();renderPlan();updateOverall();renderCard('hw');renderCard('nw');renderCard('db');updateQuizScore('hw');updateQuizScore('nw');updateQuizScore('db');
   }
 };
 
@@ -320,9 +371,21 @@ const decks={
   ['DHCP','Was macht ein DHCP-Server?','Vergibt automatisch IP-Adresse, Subnetzmaske, Gateway und DNS-Server an Geräte im Netzwerk.','Ohne DHCP müsste jedes Gerät manuell konfiguriert werden.'],
   ['MAC-Adresse','Was ist eine MAC-Adresse und wo liegt sie im OSI-Modell?','Physische Hardware-Adresse der Netzwerkkarte, Schicht 2 (Sicherungsschicht).','48 Bit lang, meist als 12 Hex-Ziffern geschrieben.'],
   ['Private IPs','Welcher Bereich gehört zum privaten Klasse-C-Netz?','192.168.0.0 – 192.168.255.255.','Weitere private Bereiche: 10.0.0.0/8 und 172.16.0.0/12.']
+ ],
+ db:[
+  ['ER-Modell','Unterschied Entitätstyp vs. Entität?','Entitätstyp ist die Kategorie (z. B. "Person"), Entität ein konkretes Exemplar (z. B. "Herr Mayer").','Entitätstyp → Tabellenname, Entität → Zeile in der Tabelle.'],
+  ['Kardinalität','Wie ermittelt man die Kardinalität einer Beziehung?','Zwei-Fragen-Trick: "Wenn ich EINE Entität von A nehme, wie viele von B kann ich ihr höchstens zuordnen?" – und dieselbe Frage umgekehrt.','Ergebnis: zwei Zahlen (1 oder n), z. B. 1:n oder m:n.'],
+  ['Schlüssel','Wo landet bei einer 1:n-Beziehung der Fremdschlüssel?','In der Tabelle mit der Kardinalität "n".','Beispiel: Person(1)–Auto(n) → FK Person_ID steht bei Auto.'],
+  ['m:n','Wie bildet man eine m:n-Beziehung im Datenbank-Schema ab?','Über eine Hilfstabelle, die die Primärschlüssel beider Seiten als Fremdschlüssel enthält.','Beispiel: Person_Lied mit Person_ID (FK) + Lied_ID (FK).'],
+  ['Normalform','Wonach fragt die 1. Normalform?','Ob alle Attribute atomar sind (keine zusammengesetzten Werte wie "Vorname Nachname" in einer Spalte).','Klassiker: Name und Adresse aufteilen.'],
+  ['Normalform','Wonach fragt die 3. Normalform?','Ob jede Tabelle nur EIN Thema behandelt ("monothematisch") – keine Vermischung z. B. von Bestellung und Kundendaten.','Vermeidet Redundanz: Kundendaten müssten sonst in mehreren Zeilen gleichzeitig geändert werden.'],
+  ['SQL-Datentypen','Welche SQL-Datentypen gibt es und wofür?','INT(11) für Zahlen/IDs, VARCHAR(255) für Text, DATE für Kalenderdatum, FLOAT(11,2)/DECIMAL(11,2) für Kommazahlen, BOOLEAN für 0/1.','Für Geldbeträge in der Praxis lieber DECIMAL statt FLOAT (exaktes Runden, kein Binärrundungsfehler).'],
+  ['Constraints','Was bewirken NOT NULL und AUTO_INCREMENT?','NOT NULL erzwingt, dass ein Wert eingetragen werden muss. AUTO_INCREMENT vergibt IDs automatisch fortlaufend.','PRIMARY KEY markiert zusätzlich den Primärschlüssel der Tabelle.'],
+  ['ALTER TABLE','Welche 4 Modi gibt es bei ALTER TABLE?','ADD (Spalte hinzufügen), DROP (Spalte löschen), CHANGE (Spalte/Attribut ändern), RENAME (Tabellenname ändern).','Syntax: ALTER TABLE tabellenname modus …'],
+  ['INSERT INTO','In welcher Reihenfolge müssen Tabellen mit INSERT INTO gefüllt werden?','Erst die Tabelle OHNE Fremdschlüssel, dann die Tabelle(n), die per FK darauf verweisen.','Sonst würde der FK auf eine noch nicht existierende Zeile verweisen.']
  ]
 };
-let cardIndex={hw:0,nw:0};
+let cardIndex={hw:0,nw:0,db:0};
 function renderCard(key){
   const c=decks[key][cardIndex[key]];
   const el=document.getElementById('flash-'+key);
@@ -334,7 +397,7 @@ function renderCard(key){
   const knownArr=state[key+'Known'];
   document.getElementById(key+'CardCount').textContent=`Karte ${cardIndex[key]+1} von ${decks[key].length} · ${knownArr.length} gewusst`;
 }
-['hw','nw'].forEach(key=>{
+['hw','nw','db'].forEach(key=>{
   document.getElementById('flash-'+key).onclick=()=>document.getElementById('flash-'+key).classList.toggle('revealed');
   document.getElementById(key+'Known').onclick=()=>{
     if(!state[key+'Known'].includes(cardIndex[key]))state[key+'Known'].push(cardIndex[key]);
@@ -364,11 +427,22 @@ const quizzes={
   {t:'MAC',q:'Wo im OSI-Modell liegt die MAC-Adresse?',o:['Schicht 3','Schicht 2','Schicht 4','Schicht 7'],a:1,e:'MAC-Adressen gehören zur Sicherungsschicht (Layer 2).'},
   {t:'Subnetting',q:'Ein Netz braucht mind. 30 Hosts. Kleinstes passendes Präfix?',o:['/28','/27','/26','/25'],a:1,e:'/27 → 5 Hostbits → 2⁵−2 = 30 Hosts, passt exakt.'},
   {t:'Private IPs',q:'Welcher Bereich ist privates Klasse-C-Netz?',o:['10.0.0.0/8','172.16.0.0/12','192.168.0.0/16','127.0.0.0/8'],a:2,e:'192.168.0.0 – 192.168.255.255 ist der private Klasse-C-Bereich.'}
+ ],
+ db:[
+  {t:'Kardinalität',q:'"Eine Bestellung gehört zu genau einem Kunden, ein Kunde kann mehrere Bestellungen haben." Welche Kardinalität?',o:['1:1','1:n','m:n','0:n'],a:1,e:'Kunde=1, Bestellung=n → 1:n.'},
+  {t:'Schlüssel',q:'Bei einer 1:n-Beziehung: wo kommt der Fremdschlüssel hin?',o:['Immer in die "1"-Tabelle','Immer in die "n"-Tabelle','In beide Tabellen','Kommt nicht vor'],a:1,e:'Der FK steht immer auf der Seite mit Kardinalität n.'},
+  {t:'m:n',q:'Wie löst man eine m:n-Beziehung im Datenbank-Schema?',o:['Gar nicht möglich','Fremdschlüssel in beiden Tabellen','Über eine zusätzliche Hilfstabelle mit beiden PKs als FK','Man braucht nur eine Tabelle'],a:2,e:'Die Hilfstabelle verbindet beide Primärschlüssel als Fremdschlüssel.'},
+  {t:'Normalform',q:'Welche Normalform verlangt atomare Attribute?',o:['1. NF','2. NF','3. NF','Es gibt keine solche Regel'],a:0,e:'1. Normalform: keine zusammengesetzten Werte in einer Spalte.'},
+  {t:'Normalform',q:'Welche Normalform verlangt "monothematische" Tabellen (nur ein Thema pro Tabelle)?',o:['1. NF','2. NF','3. NF','4. NF'],a:2,e:'3. Normalform: jede Tabelle darf nur einen Entitätstyp beschreiben.'},
+  {t:'SQL',q:'Welcher Datentyp eignet sich am besten für ein Geburtsdatum?',o:['VARCHAR(255)','INT(11)','DATE','BOOLEAN'],a:2,e:'DATE ist der Kalenderdatum-Typ.'},
+  {t:'SQL',q:'Was macht AUTO_INCREMENT?',o:['Erhöht automatisch Preise','Vergibt automatisch fortlaufende IDs','Löscht alte Zeilen automatisch','Verschlüsselt die Spalte'],a:1,e:'AUTO_INCREMENT automatisiert die ID-Vergabe.'},
+  {t:'ALTER TABLE',q:'Mit welchem Modus benennt man eine Tabelle um?',o:['ADD','DROP','CHANGE','RENAME'],a:3,e:'ALTER TABLE tabellenname RENAME neuername;'},
+  {t:'INSERT INTO',q:'Welche Tabelle muss beim Befüllen zuerst mit INSERT INTO gefüllt werden?',o:['Die Tabelle mit dem Fremdschlüssel','Die Tabelle ohne Fremdschlüssel','Egal, Reihenfolge spielt keine Rolle','Immer die Hilfstabelle zuerst'],a:1,e:'Erst die referenzierte Tabelle (ohne FK), dann die verweisende.'}
  ]
 };
-let quizIndex={hw:0,nw:0},answered={hw:false,nw:false};
+let quizIndex={hw:0,nw:0,db:0},answered={hw:false,nw:false,db:false};
 function shuffle(arr){return arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(v=>v[1]);}
-let quizOrder={hw:shuffle([...quizzes.hw.keys()]),nw:shuffle([...quizzes.nw.keys()])};
+let quizOrder={hw:shuffle([...quizzes.hw.keys()]),nw:shuffle([...quizzes.nw.keys()]),db:shuffle([...quizzes.db.keys()])};
 function renderQuiz(key){
   answered[key]=false;
   const q=quizzes[key][quizOrder[key][quizIndex[key]]];
@@ -391,7 +465,7 @@ function updateQuizScore(key){
   document.getElementById(key+'QuizScore').textContent=`${state[key+'QuizRight']} / ${state[key+'QuizTotal']}`;
   document.getElementById(key+'QuizBar').style.width=(state[key+'QuizTotal']?state[key+'QuizRight']/state[key+'QuizTotal']*100:0)+'%';
 }
-['hw','nw'].forEach(key=>{
+['hw','nw','db'].forEach(key=>{
   document.getElementById(key+'NextQuiz').onclick=()=>{
     quizIndex[key]=(quizIndex[key]+1)%quizzes[key].length;
     if(quizIndex[key]===0)quizOrder[key]=shuffle([...quizzes[key].keys()]);
@@ -483,15 +557,15 @@ document.getElementById('syncImport').onclick=()=>{
     const parsed=JSON.parse(b64decode(raw));
     Object.assign(state,parsed);
     save();
-    renderPlan();updateOverall();renderCard('hw');renderCard('nw');updateQuizScore('hw');updateQuizScore('nw');
+    renderPlan();updateOverall();renderCard('hw');renderCard('nw');renderCard('db');updateQuizScore('hw');updateQuizScore('nw');updateQuizScore('db');
     syncStatus('Importiert und übernommen.',true);
   }catch(e){syncStatus('Ungültiger Code: '+e.message,false);}
 };
 
 /* ---------- init ---------- */
 renderPlan();updateOverall();
-renderCard('hw');renderCard('nw');
-renderQuiz('hw');renderQuiz('nw');updateQuizScore('hw');updateQuizScore('nw');
+renderCard('hw');renderCard('nw');renderCard('db');
+renderQuiz('hw');renderQuiz('nw');renderQuiz('db');updateQuizScore('hw');updateQuizScore('nw');updateQuizScore('db');
 newNumTask();newSubTask();
 </script>
 </body>
