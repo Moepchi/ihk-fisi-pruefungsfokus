@@ -245,9 +245,98 @@ code.inline{background:#1c2c46;padding:2px 6px;border-radius:6px;color:var(--blu
 </div>
 </section>
 
-<!-- STUBS -->
-<section id="java" class="tab"><div class="card soon"><h2>Programmierung (Java) – noch nicht erarbeitet</h2><p class="muted">Grundlagen, Kontrollstrukturen, OOP-Konzepte folgen und werden hier ergänzt.</p></div></section>
-<section id="wiso" class="tab"><div class="card soon"><h2>Wirtschaft &amp; Sozialkunde – noch nicht erarbeitet</h2><p class="muted">Vertragsrecht, Sozialversicherung, Ausbildungsrecht etc. folgen und werden hier ergänzt.</p></div></section>
+<!-- PROGRAMMIERUNG -->
+<section id="java" class="tab">
+<div class="grid">
+<article class="card span12">
+<h2>Kontrollstrukturen &amp; Schleifentypen (Referenz)</h2>
+<p class="muted">Jeder Algorithmus – egal wie komplex – lässt sich nur aus 3 Bausteinen zusammensetzen: <strong>Sequenz</strong> (Reihenfolge), <strong>Selektion</strong> (Entscheidung), <strong>Iteration</strong> (Wiederholung).</p>
+<table class="ref"><tr><th>Schleifentyp</th><th>Prüfung</th><th>Mindest-Durchläufe</th><th>Pseudocode</th></tr>
+<tr><td>Kopfgesteuert (abweisend)</td><td>vor dem Rumpf</td><td>0 (kann übersprungen werden)</td><td><code class="inline">SOLANGE [Bed.] WIEDERHOLE … ENDE SOLANGE</code></td></tr>
+<tr><td>Fußgesteuert (nicht-abweisend)</td><td>nach dem Rumpf</td><td>mindestens 1</td><td><code class="inline">WIEDERHOLE … BIS [Bed.]</code></td></tr>
+<tr><td>Zählergesteuert</td><td>Anzahl von vornherein bekannt</td><td>genau n-mal</td><td><code class="inline">FÜR i VON 1 BIS n WIEDERHOLE … ENDE FÜR</code></td></tr>
+</table>
+<p class="muted">Merkhilfe: "Kopf zuerst prüfen, Fuß erst hinterher" – bei Kopf kann die Bedingung von Anfang an falsch sein (0 Durchläufe), bei Fuß ist der Rumpf schon gelaufen, bevor geprüft wird (mind. 1 Durchlauf).</p>
+</article>
+
+<article class="card span6">
+<h2>Referenz: Eigenschaften eines Algorithmus</h2>
+<table class="ref"><tr><th>Eigenschaft</th><th>Bedeutet</th><th>Fachbegriff</th></tr>
+<tr><td>Eindeutigkeit</td><td>Jeder Schritt klar, keine Interpretation</td><td>Determinismus</td></tr>
+<tr><td>Endlichkeit</td><td>Muss irgendwann fertig werden</td><td>Finitheit/Terminierung</td></tr>
+<tr><td>Ausführbarkeit</td><td>Jeder Schritt tatsächlich machbar</td><td>Effektivität</td></tr>
+<tr><td>Ein-/Ausgabe</td><td>nimmt Daten rein, gibt Ergebnis raus</td><td>Input/Output</td></tr>
+<tr><td>Allgemeinheit</td><td>löst eine ganze Problemklasse</td><td>Generalität</td></tr>
+</table>
+<p class="muted">Praktischer Anker: ein Kochrezept erfüllt alle 5 Eigenschaften.</p>
+</article>
+<article class="card span6">
+<h2>Referenz: UML Use-Case &amp; Aktivitätsdiagramm</h2>
+<table class="ref"><tr><th>Element</th><th>Bedeutung</th></tr>
+<tr><td><code class="inline">&lt;&lt;include&gt;&gt;</code></td><td>Eingebundener Anwendungsfall läuft <strong>immer automatisch</strong> mit. Pfeil zeigt auf den eingebundenen Fall.</td></tr>
+<tr><td><code class="inline">&lt;&lt;extend&gt;&gt;</code></td><td>Erweiternder Anwendungsfall läuft <strong>nur unter einer Bedingung</strong> (Extension Point). Pfeil zeigt auf den erweiterten Fall.</td></tr>
+<tr><td>Entscheidung (Raute)</td><td>genau ein Pfad wird gewählt (entweder/oder)</td></tr>
+<tr><td>Parallelisierung/Synchronisation (Balken)</td><td>mehrere Pfade laufen gleichzeitig, bei Synchronisation wird auf alle gewartet</td></tr>
+<tr><td>Partition (Schwimmbahn)</td><td>zeigt, welcher Akteur eine Aktion ausführt</td></tr>
+</table>
+<p class="muted">Include = Pflicht ("kommt immer mit"), Extend = Kann-Option ("nur wenn Bedingung X eintritt").</p>
+</article>
+
+<article id="flash-prog" class="card flash span8" aria-live="polite">
+<div class="question"><div class="eyebrow" id="progCardTopic"></div><h2 id="progCardQuestion"></h2><p class="muted">Klicken, um die Antwort aufzudecken</p></div>
+<div class="answer"><div class="eyebrow">Antwort</div><h2 id="progCardAnswer"></h2><p id="progCardHint" class="muted"></p></div>
+</article>
+<aside class="card span4"><h2>Karteikarten</h2><p id="progCardCount"></p><div class="controls"><button class="btn" id="progAgain">Nochmal</button><button class="btn primary" id="progKnown">Gewusst</button></div></aside>
+
+<article class="card span8"><div class="eyebrow" id="progQuizTopic"></div><h2 id="progQuizQuestion"></h2><div id="progQuizOptions"></div><div id="progFeedback" class="feedback" aria-live="polite"></div><button id="progNextQuiz" class="btn primary" hidden>Nächste Aufgabe</button></article>
+<aside class="card span4"><h2>Quiz-Modus</h2><p><strong id="progQuizScore">0 / 0</strong> richtig</p><div class="bar"><i id="progQuizBar" style="width:0"></i></div></aside>
+</div>
+</section>
+
+<!-- WIRTSCHAFT/SOZIALKUNDE -->
+<section id="wiso" class="tab">
+<div class="grid">
+<article class="card span12">
+<h2>Käuferrechte &amp; Mahnverfahren (Referenz)</h2>
+<p class="muted">Bei einem Sachmangel gilt eine feste Reihenfolge der Käuferrechte: <strong>1. Nacherfüllung</strong> (§439 BGB, Nachbesserung/Nachlieferung) → erst wenn diese scheitert/verweigert wird/unzumutbar ist: <strong>2. Rücktritt oder Minderung</strong> → <strong>3. Schadensersatz/Aufwendungsersatz</strong>.</p>
+<table class="ref"><tr><th>Schritt im Mahnverfahren</th><th>Rechtsmittel dagegen</th><th>Frist</th></tr>
+<tr><td>Mahnbescheid (Amtsgericht)</td><td>Widerspruch</td><td>2 Wochen</td></tr>
+<tr><td>Vollstreckungsbescheid</td><td>Einspruch</td><td>2 Wochen</td></tr>
+</table>
+<p class="muted">Schweigt der Schuldner auf den Mahnbescheid, wird daraus automatisch der Vollstreckungsbescheid.</p>
+</article>
+
+<article class="card span6">
+<h2>Referenz: Vollmachten</h2>
+<table class="ref"><tr><th></th><th>Handlungsvollmacht</th><th>Prokura</th></tr>
+<tr><td>Umfang</td><td>nur gewöhnliche Geschäfte des Gewerbes</td><td>alle Geschäfte außer Grundlagengeschäften</td></tr>
+<tr><td>Kennzeichnung</td><td>"i.V." / "i.A."</td><td>"ppa."</td></tr>
+<tr><td>Wer erteilt</td><td>Kaufmann oder Bevollmächtigter</td><td>nur der Inhaber selbst, Eintrag ins Handelsregister</td></tr>
+</table>
+<p class="muted">Prokura = "der zweitmächtigste Mensch der Firma nach dem Chef".</p>
+</article>
+<article class="card span6">
+<h2>Referenz: 5 Säulen der Sozialversicherung</h2>
+<table class="ref"><tr><th>Säule</th><th>seit</th><th>Satz (grob)</th><th>Besonderheit</th></tr>
+<tr><td>Krankenversicherung (KV)</td><td>1883</td><td>14,6 %</td><td>50/50</td></tr>
+<tr><td>Unfallversicherung (UV)</td><td>1884</td><td>variabel</td><td>nur AG zahlt</td></tr>
+<tr><td>Rentenversicherung (RV)</td><td>1889</td><td>18,6 %</td><td>50/50</td></tr>
+<tr><td>Arbeitslosenversicherung (ALV)</td><td>1927</td><td>2,6 %</td><td>50/50</td></tr>
+<tr><td>Pflegeversicherung (PV)</td><td>1995</td><td>3,6 %</td><td>50/50, Sonderregel Sachsen</td></tr>
+</table>
+<p class="muted">Merkhilfe: <strong>KURAP</strong> – Kranken, Unfall, Rente, Arbeitslos, Pflege, chronologisch seit 1883.</p>
+</article>
+
+<article id="flash-wiso" class="card flash span8" aria-live="polite">
+<div class="question"><div class="eyebrow" id="wisoCardTopic"></div><h2 id="wisoCardQuestion"></h2><p class="muted">Klicken, um die Antwort aufzudecken</p></div>
+<div class="answer"><div class="eyebrow">Antwort</div><h2 id="wisoCardAnswer"></h2><p id="wisoCardHint" class="muted"></p></div>
+</article>
+<aside class="card span4"><h2>Karteikarten</h2><p id="wisoCardCount"></p><div class="controls"><button class="btn" id="wisoAgain">Nochmal</button><button class="btn primary" id="wisoKnown">Gewusst</button></div></aside>
+
+<article class="card span8"><div class="eyebrow" id="wisoQuizTopic"></div><h2 id="wisoQuizQuestion"></h2><div id="wisoQuizOptions"></div><div id="wisoFeedback" class="feedback" aria-live="polite"></div><button id="wisoNextQuiz" class="btn primary" hidden>Nächste Aufgabe</button></article>
+<aside class="card span4"><h2>Quiz-Modus</h2><p><strong id="wisoQuizScore">0 / 0</strong> richtig</p><div class="bar"><i id="wisoQuizBar" style="width:0"></i></div></aside>
+</div>
+</section>
 
 <!-- PLAN -->
 <section id="plan" class="tab"><div class="grid">
@@ -296,16 +385,16 @@ code.inline{background:#1c2c46;padding:2px 6px;border-radius:6px;color:var(--blu
 
 /* ---------- topic overview ---------- */
 const topics=[
- {name:'Wirtschafts- und Sozialkunde',weight:20,status:'offen',note:'Vertragsrecht, Sozialversicherung, Ausbildung'},
+ {name:'Wirtschafts- und Sozialkunde',weight:20,status:'in Arbeit',note:'Vertragsrecht, Rechtsformen, Arbeitsrecht, Sozialversicherung'},
  {name:'Grundlagen Hardware/IT',weight:20,status:'in Arbeit',note:'Architektur, Speicher, Zahlensysteme, Schnittstellen'},
  {name:'Datenbanken',weight:20,status:'in Arbeit',note:'ER-Modell, Kardinalitäten, Normalisierung, SQL-Grundlagen'},
  {name:'Netzwerke',weight:20,status:'in Arbeit',note:'OSI, IP, Subnetting, Protokolle'},
- {name:'Programmierung',weight:20,status:'offen',note:'Java-Grundlagen, Kontrollstrukturen, OOP'}
+ {name:'Programmierung',weight:20,status:'in Arbeit',note:'UML, Algorithmen/Pseudocode, Struktogramm (Vorstufe zu Java)'}
 ];
 document.getElementById('topicBars').innerHTML=topics.map(t=>`<div class="topic"><div><strong>${t.name}</strong><small>${t.note}</small></div><div class="bar"><i style="width:${t.weight/20*100}%"></i></div><div><strong>${t.weight}%</strong><small>${t.status}</small></div></div>`).join('');
 
 /* ---------- shared state ---------- */
-const defaultState={done:[],hwKnown:[],nwKnown:[],dbKnown:[],hwQuizRight:0,hwQuizTotal:0,nwQuizRight:0,nwQuizTotal:0,dbQuizRight:0,dbQuizTotal:0};
+const defaultState={done:[],hwKnown:[],nwKnown:[],dbKnown:[],wisoKnown:[],progKnown:[],hwQuizRight:0,hwQuizTotal:0,nwQuizRight:0,nwQuizTotal:0,dbQuizRight:0,dbQuizTotal:0,wisoQuizRight:0,wisoQuizTotal:0,progQuizRight:0,progQuizTotal:0};
 const state=Object.assign({},defaultState,JSON.parse(localStorage.getItem('wbs-zp-state')||'{}'));
 const save=()=>localStorage.setItem('wbs-zp-state',JSON.stringify(state));
 
@@ -346,8 +435,8 @@ function updateOverall(){
 }
 document.getElementById('reset').onclick=()=>{
   if(confirm('Wirklich den gesamten Lernfortschritt löschen?')){
-    state.done=[];state.hwKnown=[];state.nwKnown=[];state.dbKnown=[];state.hwQuizRight=0;state.hwQuizTotal=0;state.nwQuizRight=0;state.nwQuizTotal=0;state.dbQuizRight=0;state.dbQuizTotal=0;
-    save();renderPlan();updateOverall();renderCard('hw');renderCard('nw');renderCard('db');updateQuizScore('hw');updateQuizScore('nw');updateQuizScore('db');
+    state.done=[];state.hwKnown=[];state.nwKnown=[];state.dbKnown=[];state.wisoKnown=[];state.progKnown=[];state.hwQuizRight=0;state.hwQuizTotal=0;state.nwQuizRight=0;state.nwQuizTotal=0;state.dbQuizRight=0;state.dbQuizTotal=0;state.wisoQuizRight=0;state.wisoQuizTotal=0;state.progQuizRight=0;state.progQuizTotal=0;
+    save();renderPlan();updateOverall();renderCard('hw');renderCard('nw');renderCard('db');renderCard('wiso');renderCard('prog');updateQuizScore('hw');updateQuizScore('nw');updateQuizScore('db');updateQuizScore('wiso');updateQuizScore('prog');
   }
 };
 
@@ -383,9 +472,35 @@ const decks={
   ['Constraints','Was bewirken NOT NULL und AUTO_INCREMENT?','NOT NULL erzwingt, dass ein Wert eingetragen werden muss. AUTO_INCREMENT vergibt IDs automatisch fortlaufend.','PRIMARY KEY markiert zusätzlich den Primärschlüssel der Tabelle.'],
   ['ALTER TABLE','Welche 4 Modi gibt es bei ALTER TABLE?','ADD (Spalte hinzufügen), DROP (Spalte löschen), CHANGE (Spalte/Attribut ändern), RENAME (Tabellenname ändern).','Syntax: ALTER TABLE tabellenname modus …'],
   ['INSERT INTO','In welcher Reihenfolge müssen Tabellen mit INSERT INTO gefüllt werden?','Erst die Tabelle OHNE Fremdschlüssel, dann die Tabelle(n), die per FK darauf verweisen.','Sonst würde der FK auf eine noch nicht existierende Zeile verweisen.']
+ ],
+ wiso:[
+  ['Käuferrechte','Was ist der erste Schritt bei einem Sachmangel?','Nacherfüllung (Nachbesserung oder Nachlieferung) verlangen.','Erst wenn diese scheitert, kommen Rücktritt/Minderung/Schadensersatz in Frage.'],
+  ['Mahnverfahren','Wogegen kann man beim Mahnbescheid vorgehen, wogegen beim Vollstreckungsbescheid?','Gegen den Mahnbescheid: Widerspruch. Gegen den Vollstreckungsbescheid: Einspruch.','Beide Fristen: 2 Wochen.'],
+  ['Vollmachten','Was ist Prokura und wie wird sie erkennbar?','Umfassende Vollmacht, die nur der Inhaber selbst erteilen kann; im Handelsregister eingetragen, Kennzeichnung "ppa.".','Sie deckt alle Geschäfte außer Grundlagengeschäften ab (z.B. Firma verkaufen).'],
+  ['Vollmachten','Was ist Handlungsvollmacht und wie wird sie erkennbar?','Vollmacht für die gewöhnlichen Geschäfte eines bestimmten Gewerbes; Kennzeichnung "i.V." oder "i.A.".','Enger gefasst als Prokura, kein Handelsregistereintrag nötig.'],
+  ['Ausbildung','Unter welchen Voraussetzungen kann ein Azubi während der Probezeit gekündigt werden?','Jederzeit, ohne Angabe von Gründen und ohne Frist.','Nach der Probezeit nur noch fristlos aus wichtigem Grund oder durch den Azubi selbst.'],
+  ['Kündigungsschutz','Welche 3 Kategorien von Kündigungsgründen kennt das KSchG?','Personenbedingt, verhaltensbedingt, betriebsbedingt.','Merkhilfe: Person – Verhalten – Betrieb.'],
+  ['Sozialversicherung','Nenne die 5 Säulen der Sozialversicherung.','Kranken-, Unfall-, Renten-, Arbeitslosen-, Pflegeversicherung.','Merkhilfe: KURAP.'],
+  ['Sozialversicherung','Wer zahlt bei der Unfallversicherung die Beiträge?','Allein der Arbeitgeber.','Einzige der 5 Säulen ohne Arbeitnehmeranteil.'],
+  ['Arbeitszeugnis','Was bedeutet die Formulierung "er hat sich bemüht, die Aufgaben zu erledigen"?','Verschlüsselter Code für eine schlechte Note – die Aufgaben wurden nicht oder nur teilweise korrekt erledigt.','Zeugnissprache ist wohlwollend formuliert, aber verschlüsselt kritisch.'],
+  ['Kostenrechnung','Unterschied fixe vs. variable Kosten?','Fixe Kosten bleiben unabhängig von der Produktionsmenge gleich (z.B. Miete), variable Kosten ändern sich mit der Menge (z.B. Material).','Kalkulatorische Kosten sind fiktiv angesetzte Kosten (z.B. kalkulatorischer Unternehmerlohn), die in der Buchhaltung so nicht real anfallen.'],
+  ['Datenschutz','Warum darf ein Betriebsrat bestimmte Mitarbeiterdaten einsehen?','Weil er ein gesetzlich verankertes Mitbestimmungsrecht hat, u.a. bei personellen Einzelmaßnahmen.','Der Betriebsrat hat eigene Datenerhebungs-/Einsichtsrechte, keine allgemeine Datenweitergabe an Dritte.']
+ ],
+ prog:[
+  ['Algorithmus','Nenne die 5 Eigenschaften eines Algorithmus.','Eindeutigkeit, Endlichkeit, Ausführbarkeit, Ein-/Ausgabe, Allgemeinheit.','Ein Kochrezept erfüllt alle 5.'],
+  ['Kontrollstrukturen','Welche 3 Grundbausteine gibt es für jeden Algorithmus?','Sequenz, Selektion, Iteration.','Reihenfolge, Entscheidung, Wiederholung.'],
+  ['Schleifen','Unterschied kopfgesteuerte vs. fußgesteuerte Schleife?','Kopfgesteuert prüft vor dem Rumpf (0 Durchläufe möglich), fußgesteuert prüft danach (mind. 1 Durchlauf).','SOLANGE = kopfgesteuert, WIEDERHOLE…BIS = fußgesteuert.'],
+  ['Schleifen','Wann nutzt man eine zählergesteuerte Schleife?','Wenn die Anzahl der Durchläufe von vornherein feststeht.','FÜR i VON 1 BIS n.'],
+  ['UML Use-Case','Was bedeutet <<include>> zwischen zwei Anwendungsfällen?','Der eingebundene Anwendungsfall läuft immer automatisch mit ab.','Pfeil zeigt vom Basis- zum eingebundenen Anwendungsfall.'],
+  ['UML Use-Case','Was bedeutet <<extend>> zwischen zwei Anwendungsfällen?','Der erweiternde Anwendungsfall läuft nur unter einer bestimmten Bedingung ab (Extension Point).','Pfeil zeigt vom erweiternden zum erweiterten (Basis-)Anwendungsfall.'],
+  ['Aktivitätsdiagramm','Was zeigt eine Raute (Entscheidungsknoten) im Aktivitätsdiagramm?','Genau ein Pfad wird abhängig von einer Bedingung gewählt (entweder/oder).','Im Gegensatz zur Parallelisierung, wo mehrere Pfade gleichzeitig laufen.'],
+  ['Aktivitätsdiagramm','Was zeigt ein Balken (Synchronisation) im Aktivitätsdiagramm?','Mehrere Pfade laufen parallel und werden dort wieder zusammengeführt/synchronisiert.','Alle Pfade müssen ankommen, bevor es weitergeht.'],
+  ['Klassendiagramm','Wie wird Vererbung im Klassendiagramm dargestellt?','Pfeil mit geschlossener, nicht gefüllter Pfeilspitze von der Unterklasse zur Oberklasse.','"Ist-ein"-Beziehung, z.B. Auto ist ein Fahrzeug.'],
+  ['Klassendiagramm','Was ist eine Assoziationsklasse?','Eine eigene Klasse, die zusätzliche Attribute einer Beziehung zwischen zwei Klassen abbildet (z.B. bei m:n-Beziehungen).','Vergleichbar mit der Hilfstabelle im ER-Modell.'],
+  ['Pseudocode','Wofür steht die Notation "AUSGABE" im Pseudocode/Struktogramm?','Für die Ausgabe eines Wertes/Ergebnisses an den Nutzer bzw. die Konsole.','Gegenstück zu "EINGABE" für das Einlesen von Werten.']
  ]
 };
-let cardIndex={hw:0,nw:0,db:0};
+let cardIndex={hw:0,nw:0,db:0,wiso:0,prog:0};
 function renderCard(key){
   const c=decks[key][cardIndex[key]];
   const el=document.getElementById('flash-'+key);
@@ -397,7 +512,7 @@ function renderCard(key){
   const knownArr=state[key+'Known'];
   document.getElementById(key+'CardCount').textContent=`Karte ${cardIndex[key]+1} von ${decks[key].length} · ${knownArr.length} gewusst`;
 }
-['hw','nw','db'].forEach(key=>{
+['hw','nw','db','wiso','prog'].forEach(key=>{
   document.getElementById('flash-'+key).onclick=()=>document.getElementById('flash-'+key).classList.toggle('revealed');
   document.getElementById(key+'Known').onclick=()=>{
     if(!state[key+'Known'].includes(cardIndex[key]))state[key+'Known'].push(cardIndex[key]);
@@ -438,11 +553,35 @@ const quizzes={
   {t:'SQL',q:'Was macht AUTO_INCREMENT?',o:['Erhöht automatisch Preise','Vergibt automatisch fortlaufende IDs','Löscht alte Zeilen automatisch','Verschlüsselt die Spalte'],a:1,e:'AUTO_INCREMENT automatisiert die ID-Vergabe.'},
   {t:'ALTER TABLE',q:'Mit welchem Modus benennt man eine Tabelle um?',o:['ADD','DROP','CHANGE','RENAME'],a:3,e:'ALTER TABLE tabellenname RENAME neuername;'},
   {t:'INSERT INTO',q:'Welche Tabelle muss beim Befüllen zuerst mit INSERT INTO gefüllt werden?',o:['Die Tabelle mit dem Fremdschlüssel','Die Tabelle ohne Fremdschlüssel','Egal, Reihenfolge spielt keine Rolle','Immer die Hilfstabelle zuerst'],a:1,e:'Erst die referenzierte Tabelle (ohne FK), dann die verweisende.'}
+ ],
+ wiso:[
+  {t:'Käuferrechte',q:'Was muss ein Käufer bei einem Sachmangel zuerst verlangen?',o:['Sofort Rücktritt','Sofort Schadensersatz','Nacherfüllung (Nachbesserung/Nachlieferung)','Sofort Minderung'],a:2,e:'Nacherfüllung hat immer Vorrang vor Rücktritt/Minderung/Schadensersatz.'},
+  {t:'Mahnverfahren',q:'Wogegen richtet sich der Widerspruch?',o:['Gegen den Vollstreckungsbescheid','Gegen den Mahnbescheid','Gegen ein Gerichtsurteil','Gegen eine Rechnung'],a:1,e:'Widerspruch = gegen den Mahnbescheid, Einspruch = gegen den Vollstreckungsbescheid.'},
+  {t:'Vollmachten',q:'Wer darf Prokura erteilen?',o:['Jeder Mitarbeiter','Nur der Inhaber selbst','Der Betriebsrat','Das Finanzamt'],a:1,e:'Prokura kann nur vom Inhaber persönlich erteilt werden, mit Eintrag ins Handelsregister.'},
+  {t:'Vollmachten',q:'Wie wird eine Handlungsvollmacht gekennzeichnet?',o:['ppa.','i.V. oder i.A.','e.V.','GmbH'],a:1,e:'"i.V." (in Vertretung) oder "i.A." (im Auftrag).'},
+  {t:'Ausbildung',q:'Wie kann ein Azubi während der Probezeit gekündigt werden?',o:['Gar nicht','Jederzeit ohne Angabe von Gründen','Nur fristlos aus wichtigem Grund','Nur zum Quartalsende'],a:1,e:'In der Probezeit ist eine Kündigung jederzeit ohne Angabe von Gründen und ohne Frist möglich.'},
+  {t:'Kündigungsschutz',q:'Welche 3 Kategorien von Kündigungsgründen kennt das KSchG?',o:['Personen-, verhaltens-, betriebsbedingt','Finanziell, rechtlich, sozial','Fristlos, ordentlich, außerordentlich','Es gibt nur eine Kategorie'],a:0,e:'Personenbedingt, verhaltensbedingt, betriebsbedingt.'},
+  {t:'Sozialversicherung',q:'Welche der 5 Säulen wird allein vom Arbeitgeber gezahlt?',o:['Krankenversicherung','Rentenversicherung','Unfallversicherung','Pflegeversicherung'],a:2,e:'Bei der Unfallversicherung zahlt ausschließlich der Arbeitgeber.'},
+  {t:'Sozialversicherung',q:'Seit wann gibt es die Pflegeversicherung als 5. Säule?',o:['1883','1927','1995','2005'],a:2,e:'Die Pflegeversicherung wurde 1995 als jüngste Säule eingeführt.'},
+  {t:'Arbeitszeugnis',q:'Was bedeutet "er hat sich bemüht, seine Aufgaben zu erledigen" in Zeugnissprache?',o:['Sehr gute Leistung','Aufgaben nur teilweise/nicht korrekt erledigt','Durchschnittliche Leistung','Aufgaben perfekt erledigt'],a:1,e:'Zeugnissprache ist verschlüsselt: diese Formulierung bedeutet eine schlechte Bewertung.'},
+  {t:'Kostenrechnung',q:'Was ist ein Beispiel für fixe Kosten?',o:['Materialkosten','Miete','Stückzahlabhängige Löhne','Rohstoffe'],a:1,e:'Miete fällt unabhängig von der Produktionsmenge in gleicher Höhe an.'}
+ ],
+ prog:[
+  {t:'Algorithmus',q:'Welche Eigenschaft fordert, dass ein Algorithmus irgendwann terminiert?',o:['Eindeutigkeit','Endlichkeit','Allgemeinheit','Ausführbarkeit'],a:1,e:'Endlichkeit (Finitheit): der Algorithmus muss nach endlich vielen Schritten fertig sein.'},
+  {t:'Kontrollstrukturen',q:'Welche 3 Grundbausteine hat jeder Algorithmus?',o:['Sequenz, Selektion, Iteration','Input, Output, Storage','Klasse, Objekt, Methode','Variable, Schleife, Funktion'],a:0,e:'Reihenfolge (Sequenz), Entscheidung (Selektion), Wiederholung (Iteration).'},
+  {t:'Schleifen',q:'Bei welcher Schleife ist mindestens 1 Durchlauf garantiert?',o:['Kopfgesteuert','Fußgesteuert','Zählergesteuert','Keine'],a:1,e:'Fußgesteuert prüft erst NACH dem ersten Durchlauf.'},
+  {t:'Schleifen',q:'Welche Schleife nutzt man, wenn die Anzahl der Durchläufe vorab feststeht?',o:['Kopfgesteuert','Fußgesteuert','Zählergesteuert','Endlosschleife'],a:2,e:'FÜR i VON 1 BIS n WIEDERHOLE.'},
+  {t:'UML Use-Case',q:'Was bedeutet <<include>>?',o:['Läuft nur unter Bedingung','Läuft immer automatisch mit','Wird nie ausgeführt','Ist optional für den Nutzer'],a:1,e:'Include = Pflichtbestandteil, läuft immer mit ab.'},
+  {t:'UML Use-Case',q:'Was bedeutet <<extend>>?',o:['Läuft immer mit','Läuft nur unter einer bestimmten Bedingung','Ist identisch mit include','Betrifft nur Akteure'],a:1,e:'Extend = Kann-Erweiterung, nur bei erfüllter Bedingung (Extension Point).'},
+  {t:'Aktivitätsdiagramm',q:'Wofür steht eine Raute im Aktivitätsdiagramm?',o:['Parallelisierung','Entscheidung (genau ein Pfad)','Start des Prozesses','Ende des Prozesses'],a:1,e:'Die Raute ist der Entscheidungsknoten – genau ein Pfad wird gewählt.'},
+  {t:'Aktivitätsdiagramm',q:'Wofür steht ein Balken im Aktivitätsdiagramm?',o:['Entscheidung','Parallelisierung/Synchronisation','Datenobjekt','Akteur'],a:1,e:'Der Balken teilt den Ablauf in parallele Pfade auf bzw. führt sie wieder zusammen.'},
+  {t:'Klassendiagramm',q:'Wie wird Vererbung dargestellt?',o:['Gestrichelter Pfeil','Durchgezogener Pfeil mit offener Pfeilspitze','Raute am Anfang','Kreis am Ende'],a:1,e:'Durchgezogene Linie mit geschlossener, ungefüllter Pfeilspitze zeigt zur Oberklasse.'},
+  {t:'Klassendiagramm',q:'Wann braucht man eine Assoziationsklasse?',o:['Bei 1:1-Beziehungen','Wenn eine Beziehung selbst Attribute besitzt (z.B. bei m:n)','Nur bei Vererbung','Nie'],a:1,e:'Die Assoziationsklasse bildet Zusatzattribute einer Beziehung ab, ähnlich der Hilfstabelle im ER-Modell.'}
  ]
 };
-let quizIndex={hw:0,nw:0,db:0},answered={hw:false,nw:false,db:false};
+let quizIndex={hw:0,nw:0,db:0,wiso:0,prog:0},answered={hw:false,nw:false,db:false,wiso:false,prog:false};
 function shuffle(arr){return arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(v=>v[1]);}
-let quizOrder={hw:shuffle([...quizzes.hw.keys()]),nw:shuffle([...quizzes.nw.keys()]),db:shuffle([...quizzes.db.keys()])};
+let quizOrder={hw:shuffle([...quizzes.hw.keys()]),nw:shuffle([...quizzes.nw.keys()]),db:shuffle([...quizzes.db.keys()]),wiso:shuffle([...quizzes.wiso.keys()]),prog:shuffle([...quizzes.prog.keys()])};
 function renderQuiz(key){
   answered[key]=false;
   const q=quizzes[key][quizOrder[key][quizIndex[key]]];
@@ -465,7 +604,7 @@ function updateQuizScore(key){
   document.getElementById(key+'QuizScore').textContent=`${state[key+'QuizRight']} / ${state[key+'QuizTotal']}`;
   document.getElementById(key+'QuizBar').style.width=(state[key+'QuizTotal']?state[key+'QuizRight']/state[key+'QuizTotal']*100:0)+'%';
 }
-['hw','nw','db'].forEach(key=>{
+['hw','nw','db','wiso','prog'].forEach(key=>{
   document.getElementById(key+'NextQuiz').onclick=()=>{
     quizIndex[key]=(quizIndex[key]+1)%quizzes[key].length;
     if(quizIndex[key]===0)quizOrder[key]=shuffle([...quizzes[key].keys()]);
@@ -557,15 +696,15 @@ document.getElementById('syncImport').onclick=()=>{
     const parsed=JSON.parse(b64decode(raw));
     Object.assign(state,parsed);
     save();
-    renderPlan();updateOverall();renderCard('hw');renderCard('nw');renderCard('db');updateQuizScore('hw');updateQuizScore('nw');updateQuizScore('db');
+    renderPlan();updateOverall();renderCard('hw');renderCard('nw');renderCard('db');renderCard('wiso');renderCard('prog');updateQuizScore('hw');updateQuizScore('nw');updateQuizScore('db');updateQuizScore('wiso');updateQuizScore('prog');
     syncStatus('Importiert und übernommen.',true);
   }catch(e){syncStatus('Ungültiger Code: '+e.message,false);}
 };
 
 /* ---------- init ---------- */
 renderPlan();updateOverall();
-renderCard('hw');renderCard('nw');renderCard('db');
-renderQuiz('hw');renderQuiz('nw');renderQuiz('db');updateQuizScore('hw');updateQuizScore('nw');updateQuizScore('db');
+renderCard('hw');renderCard('nw');renderCard('db');renderCard('wiso');renderCard('prog');
+renderQuiz('hw');renderQuiz('nw');renderQuiz('db');renderQuiz('wiso');renderQuiz('prog');updateQuizScore('hw');updateQuizScore('nw');updateQuizScore('db');updateQuizScore('wiso');updateQuizScore('prog');
 newNumTask();newSubTask();
 </script>
 </body>

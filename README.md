@@ -22,7 +22,8 @@ wird nur lokal im jeweiligen Browser gespeichert (localStorage).
 - **Hardware/IT**: Karteikarten + Quiz
 - **Netzwerke**: OSI-Referenztabelle, Karteikarten, Quiz, Subnetting-Trainer (zufällige Aufgaben)
 - **Datenbanken**: ER-Modell/Kardinalitäten-Referenz, SQL-Datentypen & Grundbefehle-Referenz, Karteikarten, Quiz
-- **Programmierung / Wirtschaft-Sozialkunde**: noch offen, werden in weiteren Lerneinheiten ergänzt
+- **Programmierung**: Kontrollstrukturen/Schleifentypen-, Algorithmus-Eigenschaften- & UML-Referenz, Karteikarten, Quiz
+- **Wirtschaft/Sozialkunde**: Käuferrechte/Mahnverfahren-, Vollmachten- & Sozialversicherungs-Referenz, Karteikarten, Quiz
 - **Lernplan**: Fahrplan mit abhakbaren Etappen bis zum Prüfungstermin
 
 Prüfungstermin: 21.09.2026.
